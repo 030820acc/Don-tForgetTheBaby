@@ -1,0 +1,15 @@
+extends layout.pug 
+
+block content
+    a(href='/sign-up') Don't have an account? Sign up here.
+    div.log-in-form
+        h2 Been here before? Welcome back!
+        if errors 
+            p Sorry, that wasn't a valid log in. Please try again.
+        form(action='/login' method='post')
+            input(type='hidden' name='_csrf' value=csrfToken)
+            label(for='username') Username 
+            input(type='text' name='username' value=user.username placeholder='Username')
+            label(for='password') Password 
+            input(type='password' name='password' value=user.password placeholder='Password')
+            button Log in
