@@ -1,0 +1,21 @@
+extends layout.pug 
+
+block content
+    a(href='/log-in') Log in
+    div.sign-up-form
+        h2 Sign up for free
+        if errors 
+            p Sorry, that wasn't a valid log-in. Please try again.
+        form(action='/signup' method='post')
+            input(type='hidden' name='_csrf' value=csrfToken)
+            label(for='firstName') First Name 
+            input(type='text' name='firstName' value=user.firstName placeholder='First Name')
+            label(for='lastName') Last Name 
+            input(type='text' name='lastName' value=user.lastName placeholder='Last Name')
+            label(for='email') Email
+            input(type='email' name='email' value=user.email placeholder='Email')
+            label(for='username') Username 
+            input(type='text' name='username' value=user.username placeholder='Username')
+            label(for='password') Password 
+            input(type='password' name='password' value=user.password placeholder='Password')
+            button Sign up!
