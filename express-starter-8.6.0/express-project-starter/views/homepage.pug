@@ -1,0 +1,13 @@
+extends layout.pug
+​
+block content
+    div(id="navbar")
+        a(href="" id ="logo")
+        button(id="logoutbutton")
+    div(id="mainContent")
+        div(id="left")
+            each list in lists
+                div= list.name
+        div(id="middle")
+
+        div(id="right")

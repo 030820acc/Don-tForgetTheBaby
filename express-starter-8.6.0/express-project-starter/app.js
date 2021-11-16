@@ -102,6 +102,17 @@ store.sync();
 // app.use(indexRouter);
 app.use(userRouter);
 
+app.get('/', async (req, res) => {
+  const { userId } = req.session.auth
+  const lists = await db.Lists.findAll({ where: userId })
+  // const tasks = await db.Tasks.findAll({where: })
+  res.render('homepage', {
+    title: 'Dashboard',
+    tasks,
+    lists
+  })
+})
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
