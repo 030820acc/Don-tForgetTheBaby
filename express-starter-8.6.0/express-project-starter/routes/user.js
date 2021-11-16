@@ -191,9 +191,9 @@ router.get('/user/login', csrfProtection, asyncHandler(async(req, res) => {
 }))
 
 const loginValidators = [
-  check('username')
+  check('emailOrUsername')
     .exists({ checkFalsy: true })
-    .withMessage('Please provide a value for Username.'),
+    .withMessage('Please provide a valid email or username.'),
   check('password')
     .exists({ checkFalsy: true })
     .withMessage('Please provide a value for Password.')
@@ -201,7 +201,7 @@ const loginValidators = [
 
 router.post('/user/login', loginValidators, csrfProtection, asyncHandler(async(req, res) => {
   const {
-    username,
+    emailOrUsername,
     password
   } = req.body
 
@@ -209,10 +209,17 @@ router.post('/user/login', loginValidators, csrfProtection, asyncHandler(async(r
   const validatorErrors = validationResult(req)
 
   if (validatorErrors.isEmpty()) {
-    // fetch user from database by their username
-    const user = await db.User.findOne({ where: { username }})
+    // fetch user from database by their email or username
+    let user;
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(emailOrUsername)) {
+      const email = emailOrUsername
+      user = await db.User.findOne({ where: { email }})
+    } else {
+      const username = emailOrUsername
+      user = await db.User.findOne({ where: { username }})
+    }
 
-    // if the username exists, compare their password
+    // if the email or username exists, compare their password
     if (user !== null) {
       const passwordMatch = await bcrypt.compare(password, user.hashedPassword.toString())
 
@@ -222,14 +229,14 @@ router.post('/user/login', loginValidators, csrfProtection, asyncHandler(async(r
         return res.redirect('/')
       }
     }
-
     // if username does not exist or password does not match, return error msg
     errors.push('value to make errors array not null, and trigger error msg from pug file')
   }
 
-  res.render('user-login', {
+  res.render('log-in', {
     title: 'Login',
-    username,
+    emailOrUsername,
+    errors,
     csrfToken: req.csrfToken()
   })
 }))

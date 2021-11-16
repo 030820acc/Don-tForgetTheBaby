@@ -8,8 +8,8 @@ block content
             p Sorry, that wasn't a valid log in. Please try again.
         form(action='/user/login' method='post')
             input(type='hidden' name='_csrf' value=csrfToken)
-            label(for='username') Username
-            input(type='text' name='username' value=username placeholder='Username')
+            label(for='emailOrUsername') Email or username
+            input(type='text' name='emailOrUsername' value=emailOrUsername placeholder='Email or username')
             label(for='password') Password
             input(type='password' name='password' value=password placeholder='Password')
             button Log in
