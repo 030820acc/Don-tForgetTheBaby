@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('Users', {
     name: DataTypes.STRING,
 =======
-  const User = sequelize.define('User', {
+  const User = sequelize.define('Users', {
     firstName: DataTypes.STRING,
     lastName: DataTypes.STRING,
     username: DataTypes.STRING,
@@ -12,10 +12,10 @@ module.exports = (sequelize, DataTypes) => {
     hashedPassword: DataTypes.STRING,
     email: DataTypes.STRING
   }, {});
-  Users.associate = function(models) {
+  User.associate = function(models) {
     // associations can be defined here
-    Users.hasMany(models.Lists, { foreignKey: 'userId' });
+    User.hasMany(models.Lists, { foreignKey: 'userId' });
 
   };
-  return Users;
+  return User;
 };

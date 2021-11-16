@@ -1,13 +1,13 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const Tasks = sequelize.define('Tasks', {
+  const Task = sequelize.define('Tasks', {
     taskName: DataTypes.STRING,
     listId: DataTypes.INTEGER
   }, {});
-  Tasks.associate = function (models) {
+  Task.associate = function (models) {
     // associations can be defined here
-    Tasks.belongsTo(models.Lists, { foreignKey: 'listId' });
+    Task.belongsTo(models.Lists, { foreignKey: 'listId' });
 
   };
-  return Tasks;
+  return Task;
 };
