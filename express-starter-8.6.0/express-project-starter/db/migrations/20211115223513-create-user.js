@@ -10,16 +10,16 @@ module.exports = {
       },
       firstName: {
         allowNull: false,
-        type: Sequelize.STRING(30)
+        type: Sequelize.STRING
       },
       lastName: {
         allowNull: false,
-        type: Sequelize.STRING(50)
+        type: Sequelize.STRING
       },
       username: {
         allowNull: false,
         unique: true,
-        type: Sequelize.STRING(20)
+        type: Sequelize.STRING
       },
       hashedPassword: {
         allowNull: false,
