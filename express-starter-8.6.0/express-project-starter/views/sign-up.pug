@@ -1,13 +1,14 @@
 extends layout.pug
 
 block content
-    a(href='/log-in') Log in
+    div
+        a(href='/user/login') Log in
     div.sign-up-form
         h2 Sign up for free
-        if errors 
+        if errors
             each error in errors
                 p= error
-        form(action='/signup' method='post')
+        form(action='/user/signup' method='post')
             input(type='hidden' name='_csrf' value=csrfToken)
             label(for='firstName') First Name
             input(type='text' name='firstName' value=user.firstName placeholder='First Name')
@@ -20,5 +21,5 @@ block content
             label(for='password') Password
             input(type='password' name='password' value=user.password placeholder='Password')
             label(for='confirmPassword') Confirm Password
-            input(type='password' name='confirmPassword' value=user.confirmPassword placeholder='Password')
+            input(type='password' name='confirmPassword' value=user.confirmPassword placeholder='Confirm Password')
             button Sign up!
