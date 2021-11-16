@@ -66,11 +66,11 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db/models')
-const csrf = require('csurf');
 const cookieParser = require('cookie-parser')
 const bcrypt = require('bcryptjs')
-const { check, valdationResult } = require('express-validator')
+const { check, validationResult } = require('express-validator')
 
+const csrf = require('csurf');
 const csrfProtection = csrf({ cookie: true });
 const asyncHandler = (handler) => (req, res, next) => handler(req, res, next).catch(next);
 
@@ -132,8 +132,8 @@ const userValidators = [
     }),
 ];
 
-/* GET users listing. */
-router.get('/users/signup', csrfProtection, asyncHandler(async(req, res) => {
+/* GET users signup page. */
+router.get('/user/signup', csrfProtection, asyncHandler(async(req, res) => {
   const user = await db.User.build()
   res.render('sign-up', {
     user,
@@ -148,11 +148,7 @@ const loginUser = (req, res, user) => {
   };
 };
 
-const logoutUser = (req, res) => {
-  delete req.session.auth;
-};
-
-router.post('/users/signup', userValidators, csrfProtection, asyncHandler(async(req, res) => {
+router.post('/user/signup', userValidators, csrfProtection, asyncHandler(async(req, res) => {
   const {
     firstName,
     lastName,
