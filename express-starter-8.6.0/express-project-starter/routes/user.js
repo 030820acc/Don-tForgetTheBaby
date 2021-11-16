@@ -69,6 +69,7 @@ const db = require('../db/models')
 const cookieParser = require('cookie-parser')
 const bcrypt = require('bcryptjs')
 const { check, validationResult } = require('express-validator')
+const { loginUser, logoutUser } = require('../auth')
 
 const csrf = require('csurf');
 const csrfProtection = csrf({ cookie: true });
@@ -141,12 +142,6 @@ router.get('/user/signup', csrfProtection, asyncHandler(async(req, res) => {
     csrfToken: req.csrfToken()
   });
 }));
-
-const loginUser = (req, res, user) => {
-  req.session.auth = {
-    userId: user.id,
-  };
-};
 
 router.post('/user/signup', userValidators, csrfProtection, asyncHandler(async(req, res) => {
   const {
@@ -226,6 +221,8 @@ router.post('/user/login', loginValidators, csrfProtection, asyncHandler(async(r
       //if password matches, log user in
       if (passwordMatch) {
         loginUser(req, res, user)
+        console.log('req sesh', req.session)
+
         return res.redirect('/')
       }
     }
@@ -240,5 +237,10 @@ router.post('/user/login', loginValidators, csrfProtection, asyncHandler(async(r
     csrfToken: req.csrfToken()
   })
 }))
+
+router.post('/user/logout', (req, res) => {
+  logoutUser(req, res)
+  res.redirect('/')
+})
 
 module.exports = router;
