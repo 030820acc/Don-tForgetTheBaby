@@ -190,8 +190,48 @@ router.get('/user/login', csrfProtection, asyncHandler(async(req, res) => {
   })
 }))
 
-router.post('/user/login', csrfProtection, asyncHandler(async(req, res) => {
+const loginValidators = [
+  check('username')
+    .exists({ checkFalsy: true })
+    .withMessage('Please provide a value for Username.'),
+  check('password')
+    .exists({ checkFalsy: true })
+    .withMessage('Please provide a value for Password.')
+]
 
+router.post('/user/login', loginValidators, csrfProtection, asyncHandler(async(req, res) => {
+  const {
+    username,
+    password
+  } = req.body
+
+  let errors = []
+  const validatorErrors = validationResult(req)
+
+  if (validatorErrors.isEmpty()) {
+    // fetch user from database by their username
+    const user = await db.User.findOne({ where: { username }})
+
+    // if the username exists, compare their password
+    if (user !== null) {
+      const passwordMatch = await bcrypt.compare(password, user.hashedPassword.toString())
+
+      //if password matches, log user in
+      if (passwordMatch) {
+        loginUser(req, res, user)
+        return res.redirect('/')
+      }
+    }
+
+    // if username does not exist or password does not match, return error msg
+    errors.push('value to make errors array not null, and trigger error msg from pug file')
+  }
+
+  res.render('user-login', {
+    title: 'Login',
+    username,
+    csrfToken: req.csrfToken()
+  })
 }))
 
 module.exports = router;
