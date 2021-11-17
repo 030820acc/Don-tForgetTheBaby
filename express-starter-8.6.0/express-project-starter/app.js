@@ -7,9 +7,13 @@ const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 const { sequelize } = require('./db/models');
-const { restoreUser } = require('./auth')
+const { restoreUser, requireAuth } = require('./auth')
 const userRouter = require('./routes/user');
 const { environment, sessionSecret } = require('./config')
+const db = require('./db/models');
+
+const asyncHandler = (handler) => (req, res, next) => handler(req, res, next).catch(next);
+
 
 const app = express();
 
@@ -42,25 +46,21 @@ store.sync();
 // app.use(indexRouter);
 app.use(userRouter);
 
-app.get('/', async (req, res) => {
-  const { userId } = req.session.auth
+app.get('/', requireAuth, asyncHandler(async (req, res) => {
   // const lists = await sequelize.Lists.findAll({ where: userId })
-  // const tasks = await db.Tasks.findAll({where: })
-  const tasks = [
+  // const tasks = await db.Tasks.findAll({where: })''
+  const { userId } = req.session.auth;
+  const user = await db.User.findOne({ where: { id: userId } });
+  const lists = await db.List.findAll({ where: { userID: userId } })
+  const tasks = await db.Task.findAll();
 
-    { taskName: '1' },
-    { taskName: '2' },
-  ]
-  const lists = [
-    { listName: '1' },
-    { listName: '2' },
-  ]
-  res.render('homepage', {
-    title: 'Dashboard',
-    tasks,
-    lists
-  })
-})
+
+
+  res.render('homepage', { user, lists, tasks })
+  console.log(user)
+
+
+}));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
