@@ -5,11 +5,12 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
+const asyncHandler = (handler) => (req, res, next) => handler(req, res, next).catch(next);
 
 const { sequelize } = require('./db/models');
-const { restoreUser } = require('./auth')
+const { restoreUser, requireAuth } = require('./auth')
 const userRouter = require('./routes/user');
-const { environment, sessionSecret } = require('./config')
+const { environment, sessionSecret, db } = require('./config')
 
 const app = express();
 
@@ -60,6 +61,48 @@ app.get('/', async (req, res) => {
     tasks,
     lists
   })
+})
+
+app.post('/lists/new', requireAuth, asyncHandler(async(req, res) => {
+    const { userId } = req.session.auth.userId
+    const { listName } = req.body
+
+    if (listName) {
+      const newList = await db.List.create({
+          listName,
+          userId
+      })
+      res.redirect(`/lists/${newList.id}`)
+    } else {
+      redirect('/')
+    }
+}))
+
+app.get(`/lists/:listId(\\d+)`, requireAuth, asyncHandler(async(req, res) => {
+  const listId = req.params.listId
+
+  const list = await db.List.findOne({
+    where: {
+      id: listId
+    }
+  })
+
+  const tasks = await db.Task.findAll({
+    where: {
+      listId
+    }
+  })
+
+  res.render('homepage', {
+    title: 'Dashboard',
+    tasks,
+    list
+  })
+
+}))
+
+app.post('/tasks/new', async(req, res) => {
+
 })
 
 // catch 404 and forward to error handler
