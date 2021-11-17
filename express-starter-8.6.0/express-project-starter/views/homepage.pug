@@ -8,7 +8,7 @@ block content
         div(id="left-section")
             img(src="../images/logo.jpeg" id ="logo")
             div.add-list-input
-                input(class='add-list' type='text' placeholder='Add new list...' value)
+                input(class='add-list-value' type='text' placeholder='Add new list...' value)
                 button(class='api-button' id='add-list-button') Add List
             each list in lists
                 div.list-of-lists= list.listName
@@ -47,3 +47,4 @@ block content
                     .completed-tasks
                         p#done-tasks
                         p.summary-label Completed
+    script(src="/javascripts/index.js")
