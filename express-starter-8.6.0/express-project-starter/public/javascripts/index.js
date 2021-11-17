@@ -1,4 +1,4 @@
-const db = require('../../db/models')
+import { List, Task } from '../../db/models'
 
 window.addEventListener("load", (event)=>{
     console.log("hello from javascript!")
@@ -11,9 +11,9 @@ const addList = document.querySelector('#add-list-button')
 const newListValue = document.querySelector('.add-list-value')
 
 addList.addEventListener('click', async () => {
-    const { userId } = req.session.auth
-    const newList = await db.List.create({
+    const { userID } = req.session.auth
+    const newList = await List.create({
         listName: newListValue.value,
-        userID: userId
+        userID
     })
 })
