@@ -2,5 +2,9 @@ html, body {
     margin: 0;
     font-family: sans-serif;
     padding: 0px;
-    background-color: #6e6e6e;
+    color: #6e6e6e;
+}
+
+h2 {
+    color: red;
 }
