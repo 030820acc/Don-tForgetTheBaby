@@ -106,14 +106,14 @@ app.get('/', async (req, res) => {
   const { userId } = req.session.auth
   // const lists = await sequelize.Lists.findAll({ where: userId })
   // const tasks = await db.Tasks.findAll({where: })
-  // const tasks = [
-  //   {taskName: '1'},
-  //   {taskName: '2'},
-  // ]
-  // const lists = [
-  //   {listName: '1'},
-  //   {listName: '2'},
-  // ]
+  const tasks = [
+    { taskName: '1' },
+    { taskName: '2' },
+  ]
+  const lists = [
+    { listName: '1' },
+    { listName: '2' },
+  ]
   res.render('homepage', {
     title: 'Dashboard',
     tasks,
