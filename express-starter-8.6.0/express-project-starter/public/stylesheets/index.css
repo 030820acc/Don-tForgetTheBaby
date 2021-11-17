@@ -1,3 +1,11 @@
+html, body {
+    margin: 0;
+    font-family: sans-serif;
+    padding: 0px;
+    background-color: #6e6e6e;
+}
+
+
 h1 {
     color: #555555;
 }

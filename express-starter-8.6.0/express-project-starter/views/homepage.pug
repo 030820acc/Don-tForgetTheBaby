@@ -1,13 +1,49 @@
 extends layout.pug
-​
+
 block content
     div(id="navbar")
-        a(href="" id ="logo")
+        input.searchbar(type='search' value placeholder='Search any task')
         button(id="logoutbutton")
     div(id="mainContent")
-        div(id="left")
+        div(id="left-section")
+            img(src="../images/logo.jpeg" id ="logo")
+            div.add-list-input
+                input(class='add-list' type='text' placeholder='Add new list...' value)
+                button(class='api-button' id='add-list-button') Add List
             each list in lists
-                div= list.name
-        div(id="middle")
-
-        div(id="right")
+                div.list-of-lists= list.listName
+        div(id="middle-section")
+            ul(class='task-index')
+                li#task-list-header Type in a task.
+                li#add-task-form
+                    form#new-task
+                        input(class='new-task-input' type='text' placeholder='Add new task...' value)
+                    div#property-buttons
+                        select(name='time-estimate' class='time-dropdown' data-hover-label='time-estimate')
+                            option(value='5') 5 Minutes
+                            option(value='10') 10 Minutes
+                            option(value='15') 15 Minutes
+                            option(value='30') 30 Minutes
+                            option(value='60') 1 Hour
+                            option(value='1440') 1 Day
+                        select(name='list' class='list-dropdown' data-hover-label='list')
+                            each list in lists
+                                option(value=list.id)= list.listName
+                    button(class='api-button' id='add-task-button') Add Task
+                each task in tasks
+                    li#task-row= task.taskName
+                        //- a(class=task.taskName href='')
+                        //- span= task.taskName
+        div(id="right-section")
+            .summary-section
+                h2#summary-header All
+                .summary-of-tasks
+                    .num-tasks
+                        p#task-count
+                        p.summary-label Total
+                    .time-left
+                        p#time-left
+                        p.summary-label Time Left
+                    .completed-tasks
+                        p#done-tasks
+                        p.summary-label Completed
