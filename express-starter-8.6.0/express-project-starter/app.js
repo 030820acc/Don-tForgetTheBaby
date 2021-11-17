@@ -104,8 +104,10 @@ app.use(userRouter);
 
 app.get('/', async (req, res) => {
   const { userId } = req.session.auth
-  const lists = await db.Lists.findAll({ where: userId })
+  // const lists = await sequelize.Lists.findAll({ where: userId })
   // const tasks = await db.Tasks.findAll({where: })
+  const tasks = ['1', '2', '3', '4']
+  const lists = ['1', '2', '3', '4']
   res.render('homepage', {
     title: 'Dashboard',
     tasks,
