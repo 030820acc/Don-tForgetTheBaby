@@ -5,14 +5,14 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
-const asyncHandler = (handler) => (req, res, next) => handler(req, res, next).catch(next);
+
 
 const { sequelize } = require('./db/models');
 const { restoreUser, requireAuth } = require('./auth')
 const userRouter = require('./routes/user');
 
-const { environment, sessionSecret } = require('./config')
-const db = require('./db/models');
+const { environment, sessionSecret, db } = require('./config')
+const database = require('./db/models');
 
 const asyncHandler = (handler) => (req, res, next) => handler(req, res, next).catch(next);
 
@@ -49,19 +49,16 @@ store.sync();
 app.use(userRouter);
 
 app.get('/', requireAuth, asyncHandler(async (req, res) => {
-  // const lists = await sequelize.Lists.findAll({ where: userId })
-  // const tasks = await db.Tasks.findAll({where: })''
   const { userId } = req.session.auth;
-  const user = await db.User.findOne({ where: { id: userId } });
-  const lists = await db.List.findAll({ where: { userId: userId } })
-  const tasks = await db.Task.findAll();
 
+  const lists = await database.List.findAll({ where: { userId } })
+  const tasks = await database.Task.findAll({ where: { userId }})
 
-
-  res.render('homepage', { user, lists, tasks })
-  console.log(user)
-
-
+  res.render('homepage', {
+    title: 'Dashboard',
+    lists,
+    tasks
+  })
 }));
 
 app.post('/lists/new', requireAuth, asyncHandler(async(req, res) => {
@@ -69,7 +66,7 @@ app.post('/lists/new', requireAuth, asyncHandler(async(req, res) => {
     const { listName } = req.body
 
     if (listName) {
-      const newList = await db.List.create({
+      const newList = await database.List.create({
           listName,
           userId
       })
@@ -82,13 +79,13 @@ app.post('/lists/new', requireAuth, asyncHandler(async(req, res) => {
 app.get(`/lists/:listId(\\d+)`, requireAuth, asyncHandler(async(req, res) => {
   const listId = req.params.listId
 
-  const list = await db.List.findOne({
+  const list = await database.List.findOne({
     where: {
       id: listId
     }
   })
 
-  const tasks = await db.Task.findAll({
+  const tasks = await database.Task.findAll({
     where: {
       listId
     }
