@@ -17,7 +17,7 @@ html, body {
     margin-left: 25px;
 }
 
-#main-content{
+#mainContent{
     display: flex;
     justify-content: flex-start;
 }
