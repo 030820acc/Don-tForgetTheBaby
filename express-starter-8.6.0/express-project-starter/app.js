@@ -53,7 +53,7 @@ app.get('/', requireAuth, asyncHandler(async (req, res) => {
   // const tasks = await db.Tasks.findAll({where: })''
   const { userId } = req.session.auth;
   const user = await db.User.findOne({ where: { id: userId } });
-  const lists = await db.List.findAll({ where: { userID: userId } })
+  const lists = await db.List.findAll({ where: { userId: userId } })
   const tasks = await db.Task.findAll();
 
 
