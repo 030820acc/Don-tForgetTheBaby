@@ -8,12 +8,13 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 const { sequelize } = require('./db/models');
 const { restoreUser, requireAuth } = require('./auth')
+const listRouter = require('./routes/list');
 const userRouter = require('./routes/user');
 
 const { environment, sessionSecret, db } = require('./config')
 const database = require('./db/models');
 
-const asyncHandler = (handler) => (req, res, next) => handler(req, res, next).catch(next);
+const {csrfProtection, asyncHandler } = require('./routes/utils')
 
 const app = express();
 
@@ -45,8 +46,9 @@ store.sync();
 
 // app.use(indexRouter);
 app.use(userRouter);
+app.use(listRouter);
 
-app.get('/', requireAuth, asyncHandler(async (req, res) => {
+app.get('/', requireAuth, csrfProtection, asyncHandler(async (req, res) => {
   const { userId } = req.session.auth;
 
   const lists = await database.List.findAll({ where: { userId } })
@@ -55,54 +57,55 @@ app.get('/', requireAuth, asyncHandler(async (req, res) => {
   res.render('homepage', {
     title: 'Dashboard',
     lists,
-    tasks
+    tasks,
+    csrfToken: req.csrfToken()
   })
 }));
 
-app.post('/lists/new', requireAuth, asyncHandler(async(req, res) => {
-    const { userId } = req.session.auth
-    const { listName } = req.body
-    console.log(req.body)
+// app.post('/lists/new', requireAuth, asyncHandler(async(req, res) => {
+//     const { userId } = req.session.auth
+//     const { listName } = req.body
+//     console.log(req.body)
 
-    console.log(userId)
+//     console.log(userId)
 
-    if (listName) {
-      const newList = await database.List.create({
-          listName,
-          userId
-      })
-      res.redirect(`/lists/${newList.id}`)
-    } else {
-      res.redirect('/')
-    }
-}))
+//     if (listName) {
+//       const newList = await database.List.create({
+//           listName,
+//           userId
+//       })
+//       res.redirect(`/lists/${newList.id}`)
+//     } else {
+//       res.redirect('/')
+//     }
+// }))
 
-app.get(`/lists/:listId(\\d+)`, requireAuth, asyncHandler(async(req, res) => {
-  const listId = req.params.listId
+// app.get(`/lists/:listId(\\d+)`, requireAuth, asyncHandler(async(req, res) => {
+//   const listId = req.params.listId
 
-  const list = await database.List.findOne({
-    where: {
-      id: listId
-    }
-  })
+//   const list = await database.List.findOne({
+//     where: {
+//       id: listId
+//     }
+//   })
 
-  const tasks = await database.Task.findAll({
-    where: {
-      listId
-    }
-  })
+//   const tasks = await database.Task.findAll({
+//     where: {
+//       listId
+//     }
+//   })
 
-  res.render('homepage', {
-    title: 'Dashboard',
-    tasks,
-    list
-  })
+//   res.render('homepage', {
+//     title: 'Dashboard',
+//     tasks,
+//     list
+//   })
 
-}))
+// }))
 
-app.post('/tasks/new', async(req, res) => {
+// app.post('/tasks/new', async(req, res) => {
 
-})
+// })
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

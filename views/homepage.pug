@@ -2,15 +2,15 @@ extends layout.pug
 
 block content
     div(id="navbar")
-        span.search-feature
-            img(src="../images/search.png" id='search-icon')
-            input.searchbar(type='search' value placeholder='Search any task')
+        input.searchbar(type='search' value placeholder='Search any task')
+        button(id="searchbutton") Search
         a(id="logout" href='/user/logout') Logout
     div(id="main-content")
         div(id="left-section")
             img(src="../images/logo.jpeg" id ="logo")
             div.add-list-input
                 form#new-list(action='/lists/new' method='post')
+                    input(type='hidden' name="_csrf" value=csrfToken)
                     input(class='add-list-value' type='text' name='listName' placeholder='Add new list...' value=listName)
                     button(class='api-button' id='add-list-button') Add List
             each list in lists
