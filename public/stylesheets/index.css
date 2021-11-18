@@ -14,12 +14,22 @@ html, body {
 }
 
 #logout{
-    margin-left: 25px;
+    text-decoration: none;
+    background-color: #98bcfa;
+    padding: 3px;
+    border-radius: 5px;
+    color: black;
 }
 
 #mainContent{
     display: flex;
     justify-content: flex-start;
+    background-color: #98bcfa;
+}
+
+#task-row{
+    border-top: 2px black;
+    border-bottom: 2px black;
 }
 
 #logo{
