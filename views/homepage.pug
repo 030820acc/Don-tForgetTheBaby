@@ -2,9 +2,11 @@ extends layout.pug
 
 block content
     div(id="navbar")
-        input.searchbar(type='search' value placeholder='Search any task')
+        span.search-feature
+            img(src="../images/search.png" id='search-icon')
+            input.searchbar(type='search' value placeholder='Search any task')
         a(id="logout" href='/user/logout') Logout
-    div(id="mainContent")
+    div(id="main-content")
         div(id="left-section")
             img(src="../images/logo.jpeg" id ="logo")
             div.add-list-input
@@ -48,4 +50,3 @@ block content
                     .completed-tasks
                         p#done-tasks
                         p.summary-label Completed
-    
