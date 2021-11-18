@@ -13,6 +13,8 @@ window.addEventListener("load", (event)=>{
     })
 })
 
+
+
 // const logout = document.querySelector('#logoutbutton')
 // redirect to login page?
 
