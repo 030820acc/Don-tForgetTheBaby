@@ -44,9 +44,9 @@ store.sync();
 app.use(userRouter);
 
 app.get('/', async (req, res) => {
-  const { userId } = req.session.auth
-  // const lists = await sequelize.Lists.findAll({ where: userId })
-  // const tasks = await db.Tasks.findAll({where: })
+
+  // console.log(req.session)
+
   const tasks = [
 
     { taskName: '1' },
@@ -64,17 +64,20 @@ app.get('/', async (req, res) => {
 })
 
 app.post('/lists/new', requireAuth, asyncHandler(async(req, res) => {
-    const { userId } = req.session.auth.userId
+    const { userId } = req.session.auth
     const { listName } = req.body
+    console.log(req.body)
+
+    console.log(userId)
 
     if (listName) {
-      const newList = await db.List.create({
+      const newList = await sequelize.List.create({
           listName,
           userId
       })
       res.redirect(`/lists/${newList.id}`)
     } else {
-      redirect('/')
+      res.redirect('/')
     }
 }))
 
