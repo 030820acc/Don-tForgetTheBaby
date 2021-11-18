@@ -135,6 +135,8 @@ router.post('/user/login', loginValidators, csrfProtection, asyncHandler(async(r
     password
   } = req.body
 
+  console.log(req.body)
+
   let errors = []
   const validatorErrors = validationResult(req)
 
