@@ -51,7 +51,7 @@ app.get('/', requireAuth, asyncHandler(async (req, res) => {
   const tasks = await database.Task.findAll({ where: { userId }})
 
   res.render('homepage', {
-    user,
+    title: 'Dashboard',
     lists,
     tasks
   })
