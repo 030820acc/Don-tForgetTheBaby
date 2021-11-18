@@ -5,10 +5,15 @@ window.addEventListener("load", (event)=>{
     console.log("hello from javascript!")
 })
 
+const demoButton = document.querySelector('#demo-user')
+const demoUser = document.querySelector('#creds-input')
+const demoSecret = document.querySelector('#pw-input')
 
-
-// const logout = document.querySelector('#logoutbutton')
-// redirect to login page?
+demoButton.addEventListener('click', () => {
+    console.log('inside demo click')
+    demoUser.value = 'demo_user'
+    demoSecret.value = 'demo'
+})
 
 // const addList = document.querySelector('#add-list-button')
 // const newListValue = document.querySelector('.add-list-value')
