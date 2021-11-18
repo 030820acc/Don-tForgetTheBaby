@@ -5,6 +5,8 @@ window.addEventListener("load", (event)=>{
     console.log("hello from javascript!")
 })
 
+
+
 // const logout = document.querySelector('#logoutbutton')
 // redirect to login page?
 
