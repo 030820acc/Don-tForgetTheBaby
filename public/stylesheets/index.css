@@ -2,9 +2,45 @@ html, body {
     margin: 0;
     font-family: sans-serif;
     padding: 0px;
-    background-color: #6e6e6e;
+    background-color: #2c59a8;
 }
 
+#navbar{
+    display: flex;
+    height: 40px;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right:25px;
+}
+
+#logout{
+    margin-left: 25px;
+}
+
+#main-content{
+    display: flex;
+    justify-content: flex-start;
+}
+
+#logo{
+    height: 210px;
+    width: 210px;
+}
+
+#left-section{
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    height: 600px;
+    justify-content: space-evenly;
+}
+
+#middle-section{
+    width: 500px;
+    display: flex;
+    justify-content: flex-start;
+    background-color: #f0f5f5;
+}
 
 h1 {
     color: #555555;
