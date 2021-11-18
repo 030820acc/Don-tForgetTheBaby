@@ -9,7 +9,8 @@ block content
             img(src="../images/logo.jpeg" id ="logo")
             div.add-list-input
                 form#new-list(action='lists/new' method='post')
-                    input(class='add-list-value' type='text' placeholder='Add new list...' value)
+                    input(type="hidden" name="_csrf" value=csrfToken)
+                    input(class='add-list-value' type='text' placeholder='Add new list...' name='listName')
                     button(class='api-button' id='add-list-button') Add List
             each list in lists
                 div.list-of-lists= list.listName
