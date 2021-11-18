@@ -6,7 +6,6 @@ const logger = require('morgan');
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
-
 const { sequelize } = require('./db/models');
 const { restoreUser, requireAuth } = require('./auth')
 const userRouter = require('./routes/user');
@@ -15,7 +14,6 @@ const { environment, sessionSecret, db } = require('./config')
 const database = require('./db/models');
 
 const asyncHandler = (handler) => (req, res, next) => handler(req, res, next).catch(next);
-
 
 const app = express();
 
@@ -62,8 +60,11 @@ app.get('/', requireAuth, asyncHandler(async (req, res) => {
 }));
 
 app.post('/lists/new', requireAuth, asyncHandler(async(req, res) => {
-    const { userId } = req.session.auth.userId
+    const { userId } = req.session.auth
     const { listName } = req.body
+    console.log(req.body)
+
+    console.log(userId)
 
     if (listName) {
       const newList = await database.List.create({
@@ -72,7 +73,7 @@ app.post('/lists/new', requireAuth, asyncHandler(async(req, res) => {
       })
       res.redirect(`/lists/${newList.id}`)
     } else {
-      redirect('/')
+      res.redirect('/')
     }
 }))
 

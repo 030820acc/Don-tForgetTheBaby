@@ -3,13 +3,13 @@ extends layout.pug
 block content
     div(id="navbar")
         input.searchbar(type='search' value placeholder='Search any task')
-        button(id="logoutbutton")
+        a(id="logout" href='/user/logout') Logout
     div(id="mainContent")
         div(id="left-section")
             img(src="../images/logo.jpeg" id ="logo")
             div.add-list-input
-                form#new-list(action='lists/new' method='post')
-                    input(class='add-list-value' type='text' placeholder='Add new list...' value)
+                form#new-list(action='/lists/new' method='post')
+                    input(class='add-list-value' type='text' name='listName' placeholder='Add new list...' value=listName)
                     button(class='api-button' id='add-list-button') Add List
             each list in lists
                 div.list-of-lists= list.listName

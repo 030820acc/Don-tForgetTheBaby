@@ -173,9 +173,13 @@ router.post('/user/login', loginValidators, csrfProtection, asyncHandler(async(r
   })
 }))
 
-router.post('/user/logout', (req, res) => {
+router.get('/user/logout', (req, res, next) => {
+  // req.logout()
   logoutUser(req, res)
-  res.redirect('/')
+  req.session.destroy(() => {
+      res.clearCookie('connect.sid')
+      res.redirect('/')
+  })
 })
 
 module.exports = router;
