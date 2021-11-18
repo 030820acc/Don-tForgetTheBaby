@@ -11,13 +11,16 @@ module.exports = {
       taskName: {
         type: Sequelize.STRING(50),
         allowNull: false,
-
       },
       listId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: { model: "Lists" }
-
+      },
+      userId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: { model: "Users" }
       },
       createdAt: {
         allowNull: false,
