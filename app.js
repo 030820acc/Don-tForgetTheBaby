@@ -58,7 +58,7 @@ app.get('/', requireAuth, csrfProtection, asyncHandler(async (req, res) => {
     title: 'Dashboard',
     lists,
     tasks,
-    csrfToken: req.csrfToken();
+    csrfToken: req.csrfToken()
   })
 }));
 
