@@ -5,13 +5,20 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
-const asyncHandler = (handler) => (req, res, next) => handler(req, res, next).catch(next);
+
 
 const { sequelize } = require('./db/models');
 const { restoreUser, requireAuth } = require('./auth')
 const userRouter = require('./routes/user');
+
 const { environment, sessionSecret, db } = require('./config')
 const database = require('./db/models');
+<<<<<<< HEAD
+=======
+
+const asyncHandler = (handler) => (req, res, next) => handler(req, res, next).catch(next);
+
+>>>>>>> main
 
 const app = express();
 
@@ -65,7 +72,7 @@ app.post('/lists/new', requireAuth, asyncHandler(async(req, res) => {
     console.log(userId)
 
     if (listName) {
-      const newList = await sequelize.List.create({
+      const newList = await database.List.create({
           listName,
           userId
       })
@@ -78,13 +85,13 @@ app.post('/lists/new', requireAuth, asyncHandler(async(req, res) => {
 app.get(`/lists/:listId(\\d+)`, requireAuth, asyncHandler(async(req, res) => {
   const listId = req.params.listId
 
-  const list = await db.List.findOne({
+  const list = await database.List.findOne({
     where: {
       id: listId
     }
   })
 
-  const tasks = await db.Task.findAll({
+  const tasks = await database.Task.findAll({
     where: {
       listId
     }

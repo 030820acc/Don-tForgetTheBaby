@@ -11,7 +11,6 @@ module.exports = {
       taskName: {
         type: Sequelize.STRING(50),
         allowNull: false,
-
       },
       listId: {
         type: Sequelize.INTEGER,
