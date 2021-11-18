@@ -6,19 +6,14 @@ const logger = require('morgan');
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
-
 const { sequelize } = require('./db/models');
 const { restoreUser, requireAuth } = require('./auth')
 const userRouter = require('./routes/user');
 
 const { environment, sessionSecret, db } = require('./config')
 const database = require('./db/models');
-<<<<<<< HEAD
-=======
 
 const asyncHandler = (handler) => (req, res, next) => handler(req, res, next).catch(next);
-
->>>>>>> main
 
 const app = express();
 
