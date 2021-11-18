@@ -11,6 +11,7 @@ const { sequelize } = require('./db/models');
 const { restoreUser, requireAuth } = require('./auth')
 const userRouter = require('./routes/user');
 const { environment, sessionSecret, db } = require('./config')
+const database = require('./db/models');
 
 const app = express();
 
@@ -43,25 +44,18 @@ store.sync();
 // app.use(indexRouter);
 app.use(userRouter);
 
-app.get('/', async (req, res) => {
+app.get('/', requireAuth, asyncHandler(async (req, res) => {
+  const { userId } = req.session.auth;
 
-  // console.log(req.session)
+  const lists = await database.List.findAll({ where: { userId } })
+  const tasks = await database.Task.findAll({ where: { userId }})
 
-  const tasks = [
-
-    { taskName: '1' },
-    { taskName: '2' },
-  ]
-  const lists = [
-    { listName: '1' },
-    { listName: '2' },
-  ]
   res.render('homepage', {
-    title: 'Dashboard',
-    tasks,
-    lists
+    user,
+    lists,
+    tasks
   })
-})
+}));
 
 app.post('/lists/new', requireAuth, asyncHandler(async(req, res) => {
     const { userId } = req.session.auth
