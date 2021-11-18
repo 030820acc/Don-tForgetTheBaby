@@ -173,7 +173,7 @@ router.post('/user/login', loginValidators, csrfProtection, asyncHandler(async(r
   })
 }))
 
-router.get('/user/logout', (req, res, next) => {
+router.get('/user/logout', (req, res) => {
   logoutUser(req, res)
   req.session.destroy(() => {
       res.clearCookie('connect.sid')
