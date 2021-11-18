@@ -49,19 +49,16 @@ store.sync();
 app.use(userRouter);
 
 app.get('/', requireAuth, asyncHandler(async (req, res) => {
-  // const lists = await sequelize.Lists.findAll({ where: userId })
-  // const tasks = await db.Tasks.findAll({where: })''
   const { userId } = req.session.auth;
-  const user = await db.User.findOne({ where: { id: userId } });
-  const lists = await db.List.findAll({ where: { userID: userId } })
-  const tasks = await db.Task.findAll();
 
+  const lists = await database.List.findAll({ where: { userId } })
+  const tasks = await database.Task.findAll({ where: { userId }})
 
-
-  res.render('homepage', { user, lists, tasks })
-  console.log(user)
-
-
+  res.render('homepage', {
+    title: 'Dashboard',
+    lists,
+    tasks
+  })
 }));
 
 app.post('/lists/new', requireAuth, asyncHandler(async(req, res) => {
