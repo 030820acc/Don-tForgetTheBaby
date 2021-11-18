@@ -36,3 +36,5 @@ router.post('/lists/new', requireAuth, csrfProtection, listValidators,
       });
     }
   }));
+
+  module.exports = router;
