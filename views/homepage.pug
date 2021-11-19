@@ -2,9 +2,12 @@ extends layout.pug
 
 block content
     div(id="navbar")
-        input.searchbar(type='search' value placeholder='Search any task')
-        button(id="searchbutton") Search
-        a(id="logout" href='/user/logout') Logout
+        form(action="/search" method="post")
+            input(type='hidden' name="_csrf" value=csrfToken)
+            input.searchbar(type='search' name='value' placeholder='Search any task')
+            button(id="searchbutton") Search
+        div
+            a(id="logout" href='/user/logout') Logout
     div(id="main-content")
         div(id="left-section")
             img(src="../images/logo.jpeg" id ="logo")

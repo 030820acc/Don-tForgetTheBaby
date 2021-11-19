@@ -3,14 +3,6 @@
 
 window.addEventListener("load", (event)=>{
     console.log("hello from javascript!")
-    const search = document.getElementsByClassName('searchbar')
-    const searchbutton = document.getElementById('searchbutton')
-
-
-    searchbutton.addEventListener('click', (e) => {
-        e.preventDefault()
-        const result = Task.findAll({where: {taskName: search.value}})
-    })
 
     const taskCountDisplay = document.querySelector('#task-count')
 
@@ -31,8 +23,6 @@ window.addEventListener("load", (event)=>{
 const demoButton = document.querySelector('#demo-user')
 const demoUser = document.querySelector('#creds-input')
 const demoSecret = document.querySelector('#pw-input')
-
-
 
 demoButton.addEventListener('click', () => {
     console.log('inside demo click')
