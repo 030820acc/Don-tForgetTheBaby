@@ -16,7 +16,7 @@ const listValidators = [
 
 router.post('/lists/new', requireAuth, csrfProtection, listValidators, asyncHandler(async (req, res) => {
     const { userId } = req.session.auth;
-    console.log(userId);
+    // console.log(userId);
     const {
       listName
     } = req.body
@@ -41,7 +41,7 @@ router.post('/lists/new', requireAuth, csrfProtection, listValidators, asyncHand
 }));
 
 router.get('/lists/:id', requireAuth, csrfProtection, asyncHandler(async(req, res) => {
-    console.log(req.params)
+    // console.log(req.params)
     const { id } = req.params
     // console.log(id)
     const { userId } = req.session.auth;
