@@ -8,4 +8,4 @@ block content
     form(action=`/delete/${task.id}` method='post')
       input(type='hidden' name='_csrf' value=csrfToken)
       button(class='btn btn-danger' type='submit') Delete Task?
-      a(class='btn btn-warning ml-2' href=`/${task.id}` role='button') Cancel
+      a(class='btn btn-warning ml-2' href=`/` role='button') Cancel
