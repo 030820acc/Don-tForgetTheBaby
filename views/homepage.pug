@@ -16,7 +16,7 @@ block content
                     input(type='hidden' name="_csrf" value=csrfToken)
                     input(class='add-list-value' type='text' name='listName' placeholder='Add new list...')
                     button(class='api-button' id='add-list-button') Add List
-            a.get-all-lists(href='/') All Tasks 
+            a.get-all-lists(href='/') All Tasks
             each list in lists
                 a.list-of-lists(href=`/lists/${list.id}`)= list.listName
         div(id="middle-section")
@@ -27,7 +27,7 @@ block content
                         input(type='hidden' name="_csrf" value=csrfToken)
                         input(class='new-task-input' type='text' name='taskName' placeholder='Add new task...')
                         div#property-buttons
-                            select(name='time-estimate' class='time-dropdown' data-hover-label='time-estimate')
+                            select(name='timeEstimate' class='time-dropdown' data-hover-label='time-estimate')
                                 option(value='5') 5 Minutes
                                 option(value='10') 10 Minutes
                                 option(value='15') 15 Minutes
