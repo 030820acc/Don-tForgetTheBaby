@@ -73,7 +73,8 @@ app.post('/search', csrfProtection, asyncHandler( async (req, res) => {
     {
       taskName: {
         [op.iLike]: `%${newValue}%`
-      }
+      },
+      userId
     }
   })
   console.log(tasks)

@@ -17,7 +17,7 @@ block content
                     input(class='add-list-value' type='text' name='listName' placeholder='Add new list...' value=listName)
                     button(class='api-button' id='add-list-button') Add List
             each list in lists
-                div.list-of-lists= list.listName
+                a.list-of-lists(href=`/lists/${list.id}`)= list.listName
         div(id="middle-section")
             ul(class='task-index')
                 li#task-list-header Type in a task.
