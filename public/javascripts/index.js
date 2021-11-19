@@ -12,11 +12,20 @@ window.addEventListener("load", (event)=>{
         const result = Task.findAll({where: {taskName: search.value}})
     })
 
-    const taskCount = document.querySelector('#task-count')
+    const taskCountDisplay = document.querySelector('#task-count')
 
     let numTasks = document.querySelectorAll('#task-row')
-    let counter = numTasks.length
-    taskCount.innerText = counter
+    let taskCounter = numTasks.length
+    taskCountDisplay.innerText = taskCounter
+
+    const timeDisplay = document.querySelector('#time-left')
+    let taskTimes = document.querySelectorAll('#task-time')
+
+    let time = 0
+    taskTimes.forEach(task => {
+        time += parseInt(task.className)
+    })
+    timeDisplay.innerText = `${time} Minutes`
 })
 
 const demoButton = document.querySelector('#demo-user')
