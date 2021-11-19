@@ -16,6 +16,7 @@ block content
                     input(type='hidden' name="_csrf" value=csrfToken)
                     input(class='add-list-value' type='text' name='listName' placeholder='Add new list...' value=listName)
                     button(class='api-button' id='add-list-button') Add List
+            a.get-all-lists(href='/') All Tasks 
             each list in lists
                 a.list-of-lists(href=`/lists/${list.id}`)= list.listName
         div(id="middle-section")
