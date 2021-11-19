@@ -52,10 +52,12 @@ router.get('/lists/:id', requireAuth, csrfProtection, asyncHandler(async(req, re
     })
     // console.log(tasks)
     const lists = await db.List.findAll({ where: { userId } })
+    const selectedList = await db.List.findByPk(id)
     res.render('homepage', {
       title: 'Dashboard',
       lists,
       tasks,
+      listHeader: selectedList.listName,
       csrfToken: req.csrfToken()
     })
   }))

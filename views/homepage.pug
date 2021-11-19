@@ -21,6 +21,7 @@ block content
                 a.list-of-lists(href=`/lists/${list.id}`)= list.listName
         div(id="middle-section")
             ul(class='task-index')
+                h3= listHeader
                 li#task-list-header Type in a task.
                 li#add-task-form
                     form#new-task(action='/tasks/new' method='post')
