@@ -42,7 +42,9 @@ block content
 
                 each task in tasks
                     li#task-row= task.taskName
-                        div(id='task-time' class=task.taskTime)
+                        span
+                            div(id='task-time' class=task.taskTime)
+                            a(class='btn btn-danger ml-2' href=`/delete/${task.id}` role='button') Delete
                         //- a(class=task.taskName href='')
                         //- span= task.taskName
         div(id="right-section")
