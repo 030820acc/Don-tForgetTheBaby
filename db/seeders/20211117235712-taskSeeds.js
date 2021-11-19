@@ -11,15 +11,15 @@ module.exports = {
       }], {});
       */
    return queryInterface.bulkInsert('Tasks', [
-     { taskName: 'Buy Milk', listId: 1, userId: 1, createdAt: new Date(), updatedAt: new Date() },
-     { taskName: 'Pick up eggs', listId: 1, userId: 1, createdAt: new Date(), updatedAt: new Date() },
-     { taskName: 'Laundry', listId: 2, userId: 1, createdAt: new Date(), updatedAt: new Date() },
-     { taskName: 'Cook dinner', listId: 2, userId: 1, createdAt: new Date(), updatedAt: new Date() },
-     { taskName: 'Vacuum', listId: 2, userId: 1, createdAt: new Date(), updatedAt: new Date() },
-     { taskName: 'Write code', listId: 3, userId: 1, createdAt: new Date(), updatedAt: new Date() },
-     { taskName: 'Debug ex-coworker\'s project', listId: 3, userId: 1, createdAt: new Date(), updatedAt: new Date() },
-     { taskName: 'Sous vide center cut filet mignon', listId: 4, userId: 1, createdAt: new Date(), updatedAt: new Date() },
-     { taskName: 'Boost to Diamond', listId: 4, userId: 1, createdAt: new Date(), updatedAt: new Date() },
+     { taskName: 'Buy Milk', taskTime: 5, listId: 1, userId: 1, createdAt: new Date(), updatedAt: new Date() },
+     { taskName: 'Pick up eggs', taskTime: 5, listId: 1, userId: 1, createdAt: new Date(), updatedAt: new Date() },
+     { taskName: 'Laundry', taskTime: 45, listId: 2, userId: 1, createdAt: new Date(), updatedAt: new Date() },
+     { taskName: 'Cook dinner', taskTime: 60, listId: 2, userId: 1, createdAt: new Date(), updatedAt: new Date() },
+     { taskName: 'Vacuum', taskTime: 30, listId: 2, userId: 1, createdAt: new Date(), updatedAt: new Date() },
+     { taskName: 'Write code', taskTime: 120, listId: 3, userId: 1, createdAt: new Date(), updatedAt: new Date() },
+     { taskName: 'Debug ex-coworker\'s project', taskTime: 60, listId: 3, userId: 1, createdAt: new Date(), updatedAt: new Date() },
+     { taskName: 'Sous vide center cut filet mignon', taskTime: 120, listId: 4, userId: 1, createdAt: new Date(), updatedAt: new Date() },
+     { taskName: 'Boost to Diamond', taskTime: 1440, listId: 4, userId: 1, createdAt: new Date(), updatedAt: new Date() },
    ], {});
   },
   down: (queryInterface, Sequelize) => {

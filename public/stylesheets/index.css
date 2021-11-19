@@ -55,3 +55,9 @@ html, body {
 h1 {
     color: #555555;
 }
+
+#main-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+} 

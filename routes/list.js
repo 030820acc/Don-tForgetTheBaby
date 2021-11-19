@@ -1,6 +1,7 @@
 
 const express = require('express');
 const { check, validationResult } = require('express-validator');
+const { async } = require('regenerator-runtime');
 const { requireAuth } = require('../auth')
 const db = require('../db/models');
 const { csrfProtection, asyncHandler } = require('./utils');
@@ -12,9 +13,6 @@ const listValidators = [
     .isLength({ max: 50 })
     .withMessage('List Name must not be more than 50 characters long')
 ];
-
-
-
 
 router.post('/lists/new', requireAuth, csrfProtection, listValidators,
   asyncHandler(async (req, res) => {
@@ -39,7 +37,28 @@ router.post('/lists/new', requireAuth, csrfProtection, listValidators,
         csrfToken: req.csrfToken(),
       });
     }
-  }));
+}));
+
+router.get('/lists/:id', requireAuth, csrfProtection, asyncHandler(async(req, res) => {
+    console.log(req.params)
+    const { id } = req.params
+    console.log(id)
+    const { userId } = req.session.auth;
+    const tasks = await db.Task.findAll({ where:
+      {
+        listId: id
+      }
+    })
+    console.log(tasks)
+    const lists = await db.List.findAll({ where: { userId } })
+    res.render('homepage', {
+      title: 'Dashboard',
+      lists,
+      tasks,
+      csrfToken: req.csrfToken()
+    })
+  }))
+
 
 const taskValidators = [
   check('taskName')
@@ -82,3 +101,4 @@ router.post('/tasks/new', requireAuth, csrfProtection, taskValidators,
 
 
 module.exports = router;
+
