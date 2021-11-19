@@ -33,6 +33,7 @@ block content
                             each list in lists
                                 option(value=list.id)= list.listName
                     button(class='api-button' id='add-task-button') Add Task
+                    a(class='btn btn-danger ml-2' /*href=`/delete/${task.id}`*/ role='button') Delete
                 each task in tasks
                     li#task-row= task.taskName
                         //- a(class=task.taskName href='')
@@ -50,4 +51,3 @@ block content
                     .completed-tasks
                         p#done-tasks
                         p.summary-label Completed
-    

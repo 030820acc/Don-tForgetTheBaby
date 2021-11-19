@@ -1,0 +1,12 @@
+extends layout.pug
+
+block content
+  h3= task.taskName
+  h4: em at #{task.taskName}
+  div(class='py-4')
+    p Proceed with deleting this task?
+  div
+    form(action=`/delete/${task.id}` method='post')
+      input(type='hidden' name='_csrf' value=csrfToken)
+      button(class='btn btn-danger' type='submit') Delete Attraction
+      a(class='btn btn-warning ml-2' href=`/${task.id}` role='button') Cancel
