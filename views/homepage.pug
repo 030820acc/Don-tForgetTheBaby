@@ -2,10 +2,13 @@ extends layout.pug
 
 block content
     div(id="navbar")
-        input.searchbar(type='search' value placeholder='Search any task')
-        button(id="searchbutton") Search
-        a(id="logout" href='/user/logout') Logout
-    div(id="mainContent")
+        form(action="/search" method="post")
+            input(type='hidden' name="_csrf" value=csrfToken)
+            input.searchbar(type='search' name='value' placeholder='Search any task')
+            button(id="searchbutton") Search
+        div
+            a(id="logout" href='/user/logout') Logout
+    div(id="main-content")
         div(id="left-section")
             img(src="../images/logo.jpeg" id ="logo")
             div.add-list-input
@@ -13,8 +16,9 @@ block content
                     input(type='hidden' name="_csrf" value=csrfToken)
                     input(class='add-list-value' type='text' name='listName' placeholder='Add new list...' value=listName)
                     button(class='api-button' id='add-list-button') Add List
+            a.get-all-lists(href='/') All Tasks 
             each list in lists
-                div.list-of-lists= list.listName
+                a.list-of-lists(href=`/lists/${list.id}`)= list.listName
         div(id="middle-section")
             ul(class='task-index')
                 li#task-list-header Type in a task.
@@ -27,7 +31,10 @@ block content
                             option(value='10') 10 Minutes
                             option(value='15') 15 Minutes
                             option(value='30') 30 Minutes
+                            option(value='45') 45 Minutes
                             option(value='60') 1 Hour
+                            option(value='120') 2 Hours
+                            option(value='180') 3 Hours
                             option(value='1440') 1 Day
                         select(name='list' class='list-dropdown' data-hover-label='list')
                             each list in lists
@@ -35,6 +42,7 @@ block content
                     button(class='api-button' id='add-task-button') Add Task
                 each task in tasks
                     li#task-row= task.taskName
+                        div(id='task-time' class=task.taskTime)
                         //- a(class=task.taskName href='')
                         //- span= task.taskName
         div(id="right-section")
@@ -50,4 +58,3 @@ block content
                     .completed-tasks
                         p#done-tasks
                         p.summary-label Completed
-    

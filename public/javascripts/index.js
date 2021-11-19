@@ -3,14 +3,21 @@
 
 window.addEventListener("load", (event)=>{
     console.log("hello from javascript!")
-    const search = document.getElementsByClassName('searchbar')
-    const searchbutton = document.getElementById('searchbutton')
 
+    const taskCountDisplay = document.querySelector('#task-count')
 
-    searchbutton.addEventListener('click', (e) => {
-        e.preventDefault()
-        const result = Task.findAll({where: {taskName: search.value}})
+    let numTasks = document.querySelectorAll('#task-row')
+    let taskCounter = numTasks.length
+    taskCountDisplay.innerText = taskCounter
+
+    const timeDisplay = document.querySelector('#time-left')
+    let taskTimes = document.querySelectorAll('#task-time')
+
+    let time = 0
+    taskTimes.forEach(task => {
+        time += parseInt(task.className)
     })
+    timeDisplay.innerText = `${time} Minutes`
 })
 
 const demoButton = document.querySelector('#demo-user')
@@ -22,17 +29,3 @@ demoButton.addEventListener('click', () => {
     demoUser.value = 'demo_user'
     demoSecret.value = 'demo'
 })
-
-// const addList = document.querySelector('#add-list-button')
-// const newListValue = document.querySelector('.add-list-value')
-
-// addList.addEventListener('click', async (e) => {
-//     e.preventDefault()
-
-//     let listName = newListValue.value
-//     console.log(newListValue.value)
-//     if (listName) {
-
-//     }
-
-// })
