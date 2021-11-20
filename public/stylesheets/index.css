@@ -25,6 +25,8 @@ html, body {
     display: flex;
     justify-content: flex-start;
     background-color: #98bcfa;
+    height: 675px;
+    background-color: #e8d67b;
 }
 
 #task-row{
@@ -43,13 +45,49 @@ html, body {
     width: 300px;
     height: 600px;
     justify-content: space-evenly;
+    margin-right: 25px;
 }
 
 #middle-section{
     width: 500px;
+    height: 600px;
     display: flex;
     justify-content: flex-start;
     background-color: #f0f5f5;
+}
+
+#left-section{
+    margin-right: 25px;
+    margin-left: 25px;
+}
+
+#task-row{
+    border-bottom: 2px black;
+    padding: 5px;
+}
+
+.summary-of-tasks{
+    display: flex;
+    width: 300px;
+    justify-content: space-around;
+}
+
+.num-tasks{
+    background-color: white;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.completed-tasks{
+    background-color: white;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.time-left{
+    background-color: white;
+    padding: 5px;
+    border-radius: 5px;
 }
 
 h1 {
