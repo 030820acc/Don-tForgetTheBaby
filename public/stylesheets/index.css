@@ -19,6 +19,7 @@ html, body {
     padding: 3px;
     border-radius: 5px;
     color: black;
+    margin-left: 15px;
 }
 
 #mainContent{
@@ -30,8 +31,8 @@ html, body {
 }
 
 #task-row{
-    border-top: 2px black;
-    border-bottom: 2px black;
+    border-top: 2px black solid;
+    border-bottom: 2px black solid;
 }
 
 #logo{
@@ -54,6 +55,19 @@ html, body {
     display: flex;
     justify-content: flex-start;
     background-color: #f0f5f5;
+}
+
+#new-task{
+    display: flex;
+    align-items: center;
+}
+
+#add-task-form{
+    border-bottom: 2px black solid;
+}
+
+#task-list-header {
+    display: flex;
 }
 
 #left-section{
