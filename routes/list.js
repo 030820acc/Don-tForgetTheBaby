@@ -16,7 +16,6 @@ const listValidators = [
 
 router.post('/lists/new', requireAuth, csrfProtection, listValidators, asyncHandler(async (req, res) => {
     const { userId } = req.session.auth;
-    // console.log(userId);
     const {
       listName
     } = req.body
@@ -28,9 +27,8 @@ router.post('/lists/new', requireAuth, csrfProtection, listValidators, asyncHand
         listName,
         userId: userId
       });
-      // console.log("we're here")
       return res.redirect('/');
-    } else if (!validatorErrors.isEmpty()) {
+    } else {
       const errors = validatorErrors.array().map((error) => error.msg);
       res.redirect('/', {
         title: 'List',
@@ -41,27 +39,34 @@ router.post('/lists/new', requireAuth, csrfProtection, listValidators, asyncHand
 }));
 
 router.get('/lists/:id', requireAuth, csrfProtection, asyncHandler(async(req, res) => {
-    // console.log(req.params)
     const { id } = req.params
-    // console.log(id)
     const { userId } = req.session.auth;
     const tasks = await db.Task.findAll({ where:
       {
         listId: id
       }
     })
-    // console.log(tasks)
-    const lists = await db.List.findAll({ where: { userId } })
+
+    const lists = await db.List.findAll({ where: { userId }})
+
+    const listDropdown = await db.List.findAll({
+      where: {
+        userId,
+        listName: {[op.not]: 'Completed Tasks'}
+      }
+    });
+
     const selectedList = await db.List.findByPk(id)
+
     res.render('homepage', {
       title: 'Dashboard',
       lists,
+      listDropdown,
       tasks,
       listHeader: selectedList.listName,
       csrfToken: req.csrfToken()
     })
   }))
-
 
 const taskValidators = [
   check('taskName')
@@ -71,40 +76,61 @@ const taskValidators = [
     .withMessage('Task description must not be more than 150 characters long')
 ];
 
-router.post('/tasks/new', requireAuth, csrfProtection, taskValidators,
-  asyncHandler(async (req, res) => {
+router.post('/tasks/new', requireAuth, csrfProtection, taskValidators, asyncHandler(async (req, res) => {
     const { userId } = req.session.auth;
     const {
       taskName,
       timeEstimate,
       list,
     } = req.body
-    // console.log(req.body)
 
     const validatorErrors = validationResult(req)
 
     if (validatorErrors.isEmpty()) {
       const listObject = await db.List.findByPk(list);
-      // console.log(listObject)
       const listId = listObject.id
 
       const task = await db.Task.create({
         taskName,
         taskTime: timeEstimate,
-        userId: userId,
-        listId: listId
+        userId,
+        listId
       });
-      // console.log("we're here")
+
       return res.redirect('/');
     } else {
       const errors = validatorErrors.array().map((error) => error.msg);
+      
       res.redirect('/', {
         title: 'List',
         errors,
         csrfToken: req.csrfToken(),
       });
     }
-  }));
+}));
 
+router.post('/completed', requireAuth, csrfProtection, asyncHandler(async(req, res) => {
+  const userId = req.session.auth.userId
+  const { taskId } = req.body
+
+  let taskObj = await db.Task.findByPk(taskId)
+  console.log(taskObj)
+
+  const listId = 1
+  const taskName = taskObj.taskName
+  const taskTime = taskObj.taskTime
+
+  const completedTask = await db.Task.create({
+    taskName,
+    taskTime,
+    userId,
+    listId
+  })
+
+  res.redirect('/', {
+    title: 'Dashboard',
+    csrfToken: req.csrfToken()
+  })
+}))
 
 module.exports = router;

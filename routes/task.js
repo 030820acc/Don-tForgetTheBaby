@@ -6,10 +6,7 @@ const { csrfProtection, asyncHandler } = require("./utils");
 
 // Create a new task
 
-router.get(
-  "/delete/:id(\\d+)",
-  csrfProtection,
-  asyncHandler(async (req, res) => {
+router.get("/delete/:id(\\d+)", csrfProtection, asyncHandler(async (req, res) => {
     const taskId = parseInt(req.params.id, 10);
     const task = await db.Task.findByPk(taskId);
     res.render("task-delete", {
@@ -19,10 +16,7 @@ router.get(
   })
 );
 
-router.post(
-  "/delete/:id(\\d+)",
-  csrfProtection,
-  asyncHandler(async (req, res) => {
+router.post("/delete/:id(\\d+)", csrfProtection, asyncHandler(async (req, res) => {
     const taskId = parseInt(req.params.id, 10);
     const tasks = await db.Task.findByPk(taskId);
     await tasks.destroy();

@@ -100,6 +100,7 @@ router.post('/user/signup', userValidators, csrfProtection, asyncHandler(async(r
     const hashedPassword = await bcrypt.hash(password, 10);
     user.hashedPassword = hashedPassword;
     await user.save();
+    await db.List.create({ listName: 'Completed Tasks', userId: user.id })
     loginUser(req, res, user);
     res.redirect('/');
   } else {

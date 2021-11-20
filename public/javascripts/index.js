@@ -17,7 +17,33 @@ window.addEventListener("load", (event)=>{
     taskTimes.forEach(task => {
         time += parseInt(task.className)
     })
-    timeDisplay.innerText = `${time} Minutes`
+    timeDisplay.innerText = `${time} min`
+
+    const completedTaskDisplay = document.querySelector('#done-tasks')
+    let completedTasks
+
+    if(!completedTasks) {
+        completedTaskDisplay.innerText = 0
+    }
+    else completedTaskDisplay.innerText = completedTasks
+
+})
+
+const completionButton = document.querySelector('.completion')
+
+completionButton.addEventListener('click', () => {
+    console.log('inside button event')
+    // fetch('/completed', {
+    //     method: "POST",
+    //     headers: {
+    //         "Content-Type": "application/json"
+    //     },
+    //     body: JSON.stringify({
+    //         taskId: completionButton.value
+    //     })
+    // })
+    //     .then((res) => res.json())
+    //     .then(console.log(resData))
 })
 
 const demoButton = document.querySelector('#demo-user')

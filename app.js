@@ -51,28 +51,30 @@ store.sync();
 app.use(userRouter);
 app.use(listRouter);
 app.use(taskRouter);
-app.get(
-  "/",
-  requireAuth,
-  csrfProtection,
-  asyncHandler(async (req, res) => {
+app.get("/", requireAuth, csrfProtection, asyncHandler(async (req, res) => {
     const { userId } = req.session.auth;
 
-    const lists = await database.List.findAll({ where: { userId } });
+    const lists = await database.List.findAll({ where: { userId }})
+
+    const listDropdown = await database.List.findAll({
+      where: {
+        userId,
+        listName: {[op.not]: 'Completed Tasks'}
+      }
+    });
     const tasks = await database.Task.findAll({ where: { userId } });
 
     res.render("homepage", {
       title: "Dashboard",
       lists,
+      listDropdown,
       tasks,
       csrfToken: req.csrfToken(),
     });
   })
 );
-app.post(
-  "/search",
-  csrfProtection,
-  asyncHandler(async (req, res) => {
+
+app.post("/search", csrfProtection, asyncHandler(async (req, res) => {
     const { value } = req.body;
     const newValue = value.toLowerCase();
     const { userId } = req.session.auth;
@@ -84,12 +86,20 @@ app.post(
         userId,
       },
     });
-    console.log(tasks);
-    console.log(newValue);
-    const lists = await database.List.findAll({ where: { userId } });
+
+    const lists = await database.List.findAll({ where: { userId }})
+
+    const listDropdown = await database.List.findAll({
+      where: {
+        userId,
+        listName: {[op.not]: 'Completed Tasks'}
+      }
+    });
+
     res.render("homepage", {
       title: "Dashboard",
       lists,
+      listDropdown,
       tasks,
       csrfToken: req.csrfToken(),
     });

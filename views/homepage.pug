@@ -36,17 +36,14 @@ block content
                                 option(value='60') 1 Hour
                                 option(value='1440') 1 Day
                             select(name='list' class='list-dropdown' data-hover-label='list')
-                                each list in lists
-                                    option( value= list.id )= list.listName
+                                each list in listDropdown 
+                                    option(value= list.id)= list.listName
                         button(class='api-button' id='add-task-button') Add Task
-
                 each task in tasks
                     li#task-row= task.taskName
-                        span
-                            div(id='task-time' class=task.taskTime)
-                            a(class='btn btn-danger ml-2' href=`/delete/${task.id}` role='button') Delete
-                        //- a(class=task.taskName href='')
-                        //- span= task.taskName
+                        span(id='task-time' class=task.taskTime)
+                        a(class='btn btn-danger ml-2' href=`/delete/${task.id}` role='button') Delete
+                        button.completion(value=task.id) Complete
         div(id="right-section")
             .summary-section
                 h2#summary-header All
