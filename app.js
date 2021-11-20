@@ -159,6 +159,7 @@ store.sync();
 app.use(userRouter);
 app.use(listRouter);
 app.use(taskRouter);
+
 app.get(
   "/",
   requireAuth,
