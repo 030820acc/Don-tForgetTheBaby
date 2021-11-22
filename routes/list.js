@@ -6,21 +6,12 @@ const db = require('../db/models');
 const { csrfProtection, asyncHandler } = require('./utils');
 const router = express.Router();
 
-const listValidators = [
-  check('listName')
-    .exists({ checkFalsy: true })
-    .withMessage('Please provide List Name')
-    .isLength({ max: 50 })
-    .withMessage('List Name must not be more than 50 characters long')
-];
 
 router.post('/lists/new', requireAuth, csrfProtection, asyncHandler(async (req, res) => {
   const { userId } = req.session.auth;
   const {
     listName
   } = req.body
-
-  const validatorErrors = validationResult(req);
 
   if (listName) {
     const newList = await db.List.create({ listName, userId });
@@ -59,15 +50,7 @@ router.get('/lists/:id', requireAuth, csrfProtection, asyncHandler(async (req, r
 }))
 
 
-const taskValidators = [
-  check('taskName')
-    .exists({ checkFalsy: true })
-    .withMessage('Please provide Task Description')
-    .isLength({ max: 150 })
-    .withMessage('Task description must not be more than 150 characters long')
-];
-
-router.post('/tasks/new', requireAuth, csrfProtection, taskValidators,
+router.post('/tasks/new', requireAuth, csrfProtection,
   asyncHandler(async (req, res) => {
     const { userId } = req.session.auth;
     const {
@@ -75,11 +58,9 @@ router.post('/tasks/new', requireAuth, csrfProtection, taskValidators,
       timeEstimate,
       list,
     } = req.body
-    // console.log(req.body)
 
-    const validatorErrors = validationResult(req)
 
-    if (validatorErrors.isEmpty()) {
+    if (taskName) {
       const listObject = await db.List.findByPk(list);
       // console.log(listObject)
       const listId = listObject.id
@@ -91,9 +72,9 @@ router.post('/tasks/new', requireAuth, csrfProtection, taskValidators,
         listId: listId
       });
       // console.log("we're here")
-      return res.redirect('/');
+      res.redirect(`/lists/${listId}`)
+      // return res.redirect('/');
     } else {
-      const errors = validatorErrors.array().map((error) => error.msg);
       res.redirect('/');
     }
   }));
