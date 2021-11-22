@@ -2,6 +2,7 @@ extends layout.pug
 
 block content
     div(id="navbar")
+        //- img#navLogo(src="/images/dftb.png", alt="Don't Forget The Baby!")
         form(action="/search" method="post")
             input(type='hidden' name="_csrf" value=csrfToken)
             input.searchbar(type='search' name='value' placeholder='Search any task')
@@ -10,7 +11,7 @@ block content
             a(id="logout" href='/user/logout') Logout
     div(id="main-content")
         div(id="left-section")
-            img(src="../images/logo.jpeg" id ="logo")
+            img(src="/images/dftb.png" id ="logo")
             div.add-list-input
                 form#new-list(action='/lists/new' method='post')
                     input(type='hidden' name="_csrf" value=csrfToken)

@@ -46,7 +46,7 @@ html, body {
     width: 300px;
     height: 600px;
     justify-content: space-evenly;
-    margin-right: 25px;
+    /* margin-right: 25px; */
 }
 
 #middle-section{
@@ -66,10 +66,6 @@ html, body {
     display: flex;
 }
 
-#left-section{
-    margin-right: 25px;
-    margin-left: 25px;
-}
 
 #task-row{
     border-bottom: 2px black;
@@ -80,6 +76,19 @@ html, body {
     display:flex;
 }
 
+#logo{
+ height: 300px;
+ width: 300px;
+ align-content: vertical;
+}
+
+
+
+#navLogo {
+    height: 100px;
+    width: 100px;
+
+}
 .summary-of-tasks{
     display: flex;
     width: 300px;
