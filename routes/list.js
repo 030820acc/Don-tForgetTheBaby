@@ -29,7 +29,7 @@ router.post(
       listName
     } = req.body
 
-
+const validatorErrors = validationResult(req);
 
 //   if (listName) {
 //     const newList = await db.List.create({ listName, userId });
