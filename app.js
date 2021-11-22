@@ -6,8 +6,8 @@ const logger = require("morgan");
 const session = require("express-session");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
 
-const sequelize = require('sequelize')
-const Op = sequelize.Op
+const Sequelize = require('sequelize')
+const Op = Sequelize.Op
 
 const { sequelize } = require("./db/models");
 const { restoreUser, requireAuth } = require("./auth");
