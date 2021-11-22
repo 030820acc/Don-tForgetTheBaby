@@ -51,7 +51,6 @@ router.post(
       });
     }
   }
-);
 
 
 router.get('/lists/:id', requireAuth, csrfProtection, asyncHandler(async(req, res) => {
