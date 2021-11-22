@@ -54,7 +54,7 @@ const demoButton = document.getElementById('demo-user')
 const demoUser = document.getElementById('creds-input')
 const demoSecret = document.getElementById('pw-input')
 
-demoButton.addEventListener('click', () => {
+demoButton.addEventListener('click', (e) => {
     console.log('inside demo click')
     demoUser.value = 'demo_user'
     demoSecret.value = 'demo'
