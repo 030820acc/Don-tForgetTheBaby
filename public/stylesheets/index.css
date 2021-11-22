@@ -82,6 +82,21 @@ html, body {
  align-content: vertical;
 }
 
+#taskDeletePage{
+    text-align: center;
+    margin-top: 20%;}
+
+.deleteTaskConfirm{
+    margin-right: 10px;
+}
+
+.deleteTaskMessage{
+    color: White;
+}
+
+
+
+
 
 
 #navLogo {
