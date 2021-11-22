@@ -1,25 +1,29 @@
-extends layout.pug
+
 
 block content
-    div
+    link(rel='stylesheet' href='/stylesheets/log-in.css')
+    link(rel='stylesheet' href='/stylesheets/sign-up.css')
+    <div class="split left">
+        h1(id="header")="Don't Forget The Baby"   
+    <div class="split right">
         a(href='/user/login') Log in
-    div.sign-up-form
-        h2 Sign up for free
+    div(id="sign-up-form")
+        h2="Sign up for free"
         if errors
             each error in errors
-                p= error
+                p= error           
         form(action='/user/signup' method='post')
             input(type='hidden' name='_csrf' value=csrfToken)
-            label(for='firstName') First Name
-            input(type='text' name='firstName' value=user.firstName placeholder='First Name')
-            label(for='lastName') Last Name
-            input(type='text' name='lastName' value=user.lastName placeholder='Last Name')
-            label(for='email') Email
-            input(type='email' name='email' value=user.email placeholder='Email')
-            label(for='username') Username
-            input(type='text' name='username' value=user.username placeholder='Username')
-            label(for='password') Password
-            input(type='password' name='password' value=user.password placeholder='Password (case sensitive)')
-            label(for='confirmPassword') Confirm Password
-            input(type='password' name='confirmPassword' value=user.confirmPassword placeholder='Confirm Password')
-            button Sign up!
+            label(for='firstName' id='firstname') First Name
+                input(type='text' name='firstName' value=user.firstName placeholder='First Name')
+            label(for='lastName' id='lastname') Last Name
+                input(type='text' name='lastName' value=user.lastName placeholder='Last Name')
+            label(for='email' id='email') Email
+                input(type='email' name='email' value=user.email placeholder='Email')
+            label(for='username' id='username') Username
+                input(type='text' name='username' value=user.username placeholder='Username')
+            label(for='password' id='pw') Password
+                input(type='password' name='password' value=user.password placeholder='Password (case sensitive)')
+            label(for='confirmPassword' id='confirm-pw') Confirm Password 
+                input(type='password' name='confirmPassword' value=user.confirmPassword placeholder='Confirm Password ')
+            button(id="signup") Sign up!

@@ -51,7 +51,9 @@ store.sync();
 app.use(userRouter);
 app.use(listRouter);
 app.use(taskRouter);
+
 app.get("/", requireAuth, csrfProtection, asyncHandler(async (req, res) => {
+
     const { userId } = req.session.auth;
 
     const lists = await database.List.findAll({ where: { userId }})

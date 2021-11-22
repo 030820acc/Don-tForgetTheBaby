@@ -44,6 +44,7 @@ block content
                         span(id='task-time' class=task.taskTime)
                         a(class='btn btn-danger ml-2' href=`/delete/${task.id}` role='button') Delete
                         button.completion(value=task.id) Complete
+
         div(id="right-section")
             .summary-section
                 h2#summary-header All
@@ -57,3 +58,5 @@ block content
                     .completed-tasks
                         p.summary-label Completed
                         p#done-tasks
+
+
