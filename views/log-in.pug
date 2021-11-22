@@ -1,17 +1,20 @@
 extends layout.pug
 
 block content
-    a(href='/user/signup') Don't have an account? Sign up here.
-    div.log-in-form
-        h2 Been here before? Welcome back!
-        if errors
-            p Sorry, that wasn't a valid log in. Please try again.
-        form(action='/user/login' method='post')
-            input(type='hidden' name='_csrf' value=csrfToken)
-            label(for='emailOrUsername') Email or username
-            input(type='text' name='emailOrUsername' id='creds-input' value=emailOrUsername placeholder='Email or username')
-            label(for='password') Password
-            input(type='password' name='password' id='pw-input' value=password placeholder='Password (case sensitive)')
-            button Log In
-            hr
-            button(id='demo-user') Demo Log In
+    link(rel='stylesheet' href='/stylesheets/log-in.css')
+    div(class="split left")
+    div(class="split right")
+         h2 Been here before? Welcome back!
+         div.log-in-form
+            if errors
+             p Sorry, that wasn't a valid log in. Please try again.
+         form(action='/user/login' method='post')
+                input(type='hidden' name='_csrf' value=csrfToken)
+                label(for='emailOrUsername') Email or username
+                input(type='text' name='emailOrUsername' id='creds-input' value=emailOrUsername placeholder='Email or username')
+                label(for='password') Password
+                input(type='password' name='password' id='pw-input' value=password placeholder='Password (case sensitive)')
+                button Log In
+                hr
+                button(id='demo-user') Demo Log In
+                a(href='/user/signup') Don't have an account? Sign up here.
