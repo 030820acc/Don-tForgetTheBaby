@@ -22,7 +22,10 @@ block content
                 a.list-of-lists(href=`/lists/${list.id}`)= list.listName
         div(id="middle-section")
             ul(class='task-index')
-                h3= listHeader
+                if listHeader
+                    h1= listHeader
+                else 
+                    h1 All Tasks
                 //- li#task-list-header Type in a task.
                 form#new-task(action='/tasks/new' method='post')
                     input(type='hidden' name="_csrf" value=csrfToken)
