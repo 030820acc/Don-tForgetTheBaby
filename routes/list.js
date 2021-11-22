@@ -23,16 +23,16 @@ router.post('/lists/new', requireAuth, csrfProtection, asyncHandler(async (req, 
   const validatorErrors = validationResult(req);
 
   if (listName) {
-    const newList = await db.UserList.build({ listName, userId });
-    await newList.save()
+    const newList = await db.List.create({ listName, userId });
+    // await newList.save()
 
     res.redirect(`/lists/${newList.id}`)
     // return res.redirect('/');
   } else {
     res.redirect('/')
 
-}
   }
+}
 ));
 
 router.get('/lists/:id', requireAuth, csrfProtection, asyncHandler(async (req, res) => {
