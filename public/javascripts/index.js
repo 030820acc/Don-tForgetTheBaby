@@ -1,6 +1,6 @@
 // import { List, Task } from '../../db/models'
 // const db = require('../../db/models')
-window.onload = function() {
+
 window.addEventListener("load", (event)=>{
     console.log("hello from javascript!")
 
@@ -60,4 +60,4 @@ demoButton.addEventListener('click', (e) => {
     demoUser.value = 'demo_user'
     demoSecret.value = 'demo'
 })
-}
+
