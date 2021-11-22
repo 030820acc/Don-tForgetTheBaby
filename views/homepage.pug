@@ -44,7 +44,7 @@ block content
                     li#task-row= task.taskName
                         span
                             div(id='task-time' class=task.taskTime)
-                            a(class='btn btn-danger ml-2' href=`/delete/${task.id}` role='button') Delete
+                            a(class='taskDeleteButton' href=`/delete/${task.id}` role='button') Delete
                         //- a(class=task.taskName href='')
                         //- span= task.taskName
         div(id="right-section")
