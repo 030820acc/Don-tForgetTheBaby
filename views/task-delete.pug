@@ -7,5 +7,5 @@ block content
   div
     form(action=`/delete/${task.id}` method='post')
       input(type='hidden' name='_csrf' value=csrfToken)
-      button(class='btn btn-danger' type='submit') Delete Task?
-      a(class='btn btn-warning ml-2' href=`/` role='button') Cancel
+      button(class='api-button' type='submit') Delete Task?
+      a(class='api-button' href=`/` role='button') Cancel
