@@ -3,6 +3,7 @@ const router = express.Router();
 const db = require("../db/models");
 const { requireAuth } = require("../auth");
 const { csrfProtection, asyncHandler } = require("./utils");
+const op = require('sequelize')
 
 // Create a new task
 
