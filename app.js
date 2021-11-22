@@ -6,8 +6,8 @@ const logger = require("morgan");
 const session = require("express-session");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
 
-const sqlz = require("sequelize");
-const op = sqlz.Op;
+const sequelize = require('sequelize')
+const Op = sequelize.Op
 
 const { sequelize } = require("./db/models");
 const { restoreUser, requireAuth } = require("./auth");
@@ -61,7 +61,7 @@ app.get("/", requireAuth, csrfProtection, asyncHandler(async (req, res) => {
     const listDropdown = await database.List.findAll({
       where: {
         userId,
-        listName: {[op.not]: 'Completed Tasks'}
+        listName: {[Op.not]: 'Completed Tasks'}
       }
     });
     const tasks = await database.Task.findAll({ where: { userId } });
@@ -83,7 +83,7 @@ app.post("/search", csrfProtection, asyncHandler(async (req, res) => {
     const tasks = await database.Task.findAll({
       where: {
         taskName: {
-          [op.iLike]: `%${newValue}%`,
+          [Op.iLike]: `%${newValue}%`,
         },
         userId,
       },
@@ -94,7 +94,7 @@ app.post("/search", csrfProtection, asyncHandler(async (req, res) => {
     const listDropdown = await database.List.findAll({
       where: {
         userId,
-        listName: {[op.not]: 'Completed Tasks'}
+        listName: {[Op.not]: 'Completed Tasks'}
       }
     });
 
