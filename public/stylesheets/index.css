@@ -2,7 +2,107 @@ html, body {
     margin: 0;
     font-family: sans-serif;
     padding: 0px;
-    background-color: #2c59a8;
+    background-color: white;
+}
+
+a:link { text-decoration: none; }
+
+
+a:visited { text-decoration: none; }
+
+#signUpButton{
+    position: absolute;
+    top: 17px;
+    right: 17px;
+    padding: 7px;
+    background-color: #d24b03;
+    border-radius: 3px;
+    color: White;
+    font-weight: bold;
+    border:none;
+    font-size: 10px;
+}
+
+#signUpButton:hover{
+
+    background-color: #a03902}
+
+
+#loginLogo{
+    height: auto;
+    width: 50%;
+    
+}
+
+.loginButton{
+    padding: 15px;
+    background-color: #3b579d;
+    border-radius: 3px;
+    color: White;
+    font-weight: bold;
+    text-align: center;
+    border:none;
+    font-size: 20px;
+
+}
+
+.loginButton:hover{
+    background-color: #1D3C78;
+
+    cursor: pointer;
+}
+
+
+.login{
+    display: flex;
+}
+
+.log-in-form{
+    display: flex;
+    margin-top: 20px;
+    flex-direction: column;
+    justify-content: center  ;
+    margin-left: 10%;}
+
+#creds-input{
+    height: 36px;
+    padding: 6px 12px;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+#pw-input{
+    height: 36px;
+    padding: 6px 12px;
+    font-size: 16px;
+    margin-bottom: 10px;
+
+}
+.loginForm{
+    display: flex;
+    flex-direction: column;
+}
+    
+
+#demo-user{
+    margin-top: 20px;
+    background-color: #009dff;
+    font-size: 32px;
+    font-weight: bold;
+    border-radius: 3px;
+    border: none;
+    color: white;
+
+    padding: 15px;
+    text-align: center;
+
+}
+
+#demo-user:hover{
+    background-color: #076AE0;
+    cursor: pointer;
+
+
 }
 
 #navbar{
@@ -10,51 +110,126 @@ html, body {
     height: 40px;
     justify-content: flex-end;
     align-items: center;
-    margin-right:25px;
+    background-color: #076AE0;
 }
+
+#searchbutton:hover{
+    cursor: pointer;
+}
+
+ul.allLists {
+    list-style-type: square;
+  }
+
+  ul.allLists:hover {
+    list-style-type: square;
+  }
 
 #logout{
     text-decoration: none;
-    background-color: #98bcfa;
-    padding: 3px;
-    border-radius: 5px;
-    color: black;
+    background-color: #1D3C78;
+    border-radius: 3px;
+    font-size: 10px;
+    padding:7px;
+    color: white;
     margin-left: 15px;
+    margin-right: 15px;
+    font-weight: bold;
 }
 
 #mainContent{
     display: flex;
     justify-content: flex-start;
-    background-color: #98bcfa;
+    background-color: #e4eef8;
     height: 675px;
-    background-color: #e8d67b;
+    background-color: white;
 }
 
 #task-row{
     border-top: 2px black solid;
     border-bottom: 2px black solid;
+    display: inline-flex;
 }
 
-#logo{
-    height: 210px;
-    width: 210px;
+.task-index{
+    padding-left: 0px;
 }
+
+
 
 #left-section{
     display: flex;
     flex-direction: column;
     width: 300px;
     height: 600px;
-    justify-content: space-evenly;
+    /* justify-content: space-between; */
+    padding-left: 20px;
+    padding-right: 20px;
+
     /* margin-right: 25px; */
 }
+
+.get-all-lists{
+    padding-top: 15px;
+    padding-bottom: 25px;
+    color: black;
+    font-size: 20px;
+
+}
+
+.list-of-lists{
+    padding-bottom: 25px;
+    font-size: 20px;
+    color: black;
+
+
+}
+
+.list-of-lists:hover{
+    color: grey;
+}
+
+.get-all-lists:hover{
+    color: grey;
+}
+
+
+
+
+
+
 
 #middle-section{
     width: 500px;
     height: 660px;
     display: flex;
     justify-content: flex-start;
-    background-color: #f0f5f5;
+    background-color: white;
+    padding: 20px;
+}
+
+#right-section{
+    width: 500px;
+    height: 660px;
+    display: flex;
+    justify-content: flex-start;
+    padding:20px;
+}
+
+.listHeader{
+    padding-top: 0px;
+}
+#summary-header{
+    margin-top: 37px;
+    /* margin-left: 37px; */
+}
+
+.add-list.input{
+    margin: 0px;
+}
+
+.listHeader{
+    margin: 8px;
 }
 
 #new-task{
@@ -67,6 +242,7 @@ html, body {
 }
 
 
+
 #task-row{
     border-bottom: 2px black;
     padding: 5px;
@@ -77,14 +253,16 @@ html, body {
 }
 
 #logo{
- height: 300px;
- width: 300px;
+ height: 270px;
+ width: 270px;
  align-content: vertical;
-}
+ margin-left: 20%;}
 
 #taskDeletePage{
     text-align: center;
-    margin-top: 20%;}
+    margin-top: 20%;
+    }
+
 
 .deleteTaskConfirm{
     margin-right: 10px;
@@ -98,8 +276,10 @@ html, body {
     cursor: pointer;
 }
 
+
+
 .deleteTaskMessage{
-    color: White;
+    color: red;
 }
 
 
@@ -114,27 +294,55 @@ html, body {
 }
 .summary-of-tasks{
     display: flex;
-    width: 300px;
-    justify-content: space-around;
+    flex-direction: column;
+    width: 400px;
+    /* justify-content: space-around; */
 }
+
+
+
+/* 
+    display: inline;
+} */
 
 .num-tasks{
+    
     background-color: white;
-    padding: 5px;
-    border-radius: 5px;
-}
-
-.completed-tasks{
-    background-color: white;
-    padding: 5px;
-    border-radius: 5px;
+    border-radius: 3px;
+    display: inline-flex;
+    margin-bottom: 20px;
+    font-size: 20px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    padding-left: 10px;
 }
 
 .time-left{
     background-color: white;
-    padding: 5px;
-    border-radius: 5px;
+    border-radius: 3px;
+    display: inline-flex;
+    font-size: 20px;
+    padding-left: 10px;
+
+    
+
+    margin-bottom: 20px;
+
+
 }
+
+.completed-tasks{
+    background-color: white;
+    margin: 70px;
+    border-radius: 3px;
+
+}
+
+.summary-label{
+    display: inline-block;
+}
+
+
 
 h1 {
     color: #555555;
@@ -144,12 +352,10 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    background-color: #b6c9e3;
+    background-color: #e4eef8;
 } 
 
-#task-time{
-    display: inline;
-}
+
 
 #deleteButton {
     padding-left: 10px;

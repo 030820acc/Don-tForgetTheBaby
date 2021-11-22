@@ -11,15 +11,19 @@ block content
             a(id="logout" href='/user/logout') Logout
     div(id="main-content")
         div(id="left-section")
-            img(src="/images/dftb.png" id ="logo")
+            //- img(src="/images/dftb.png" id ="logo")
             div.add-list-input
+                h1.listHeader Lists
                 form#new-list(action='/lists/new' method='post')
                     input(type='hidden' name="_csrf" value=csrfToken)
                     input(class='add-list-value' type='text' name='listName' placeholder='Add new list...')
                     button(class='api-button' id='add-list-button') Add List
-            a.get-all-lists(href='/') All Tasks
-            each list in lists
-                a.list-of-lists(href=`/lists/${list.id}`)= list.listName
+            ul.allLists
+                li
+                    a.get-all-lists(href='/') All Tasks
+                each list in lists
+                    li
+                        a.list-of-lists(href=`/lists/${list.id}`)= list.listName
         div(id="middle-section")
             ul(class='task-index')
                 if listHeader
@@ -53,14 +57,19 @@ block content
                         //- span= task.taskName
         div(id="right-section")
             .summary-section
-                h2#summary-header All
-                .summary-of-tasks
-                    .num-tasks
-                        p.summary-label Total
-                        p#task-count
-                    .time-left
-                        p.summary-label Time Left
+                if listHeader
+                    h1#summary-header Tasks in  #{listHeader}
+                else 
+                    h1#summary-header Tasks in All Lists #{listHeader}
+                ul.summary-of-tasks
+                    li.num-tasks
+                        .summary-label Total:     
+                        #task-count
+                    li.time-left
+                        p.summary-label Estimated Time to Complete:
                         p#time-left
-                    .completed-tasks
-                        p.summary-label Completed
-                        p#done-tasks
+                img(src="/images/dftb.png" id ="logo")
+
+                        //- li.completed-tasks
+                        //-     p.summary-label Completed
+                        //-     p#done-tasks
