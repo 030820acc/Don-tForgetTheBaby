@@ -106,7 +106,8 @@ a:visited { text-decoration: none; }
     margin-top: 20px;
     flex-direction: column;
     justify-content: center  ;
-    margin-left: 10%;}
+    margin-left: 10%;
+    width: 400px}
 
 #creds-input{
     height: 36px;
