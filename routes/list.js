@@ -2,6 +2,7 @@ const express = require("express");
 const { check, validationResult } = require("express-validator");
 const { async } = require("regenerator-runtime");
 const { requireAuth } = require("../auth");
+const op = require('sequelize')
 const db = require("../db/models");
 const { csrfProtection, asyncHandler } = require("./utils");
 const router = express.Router();
