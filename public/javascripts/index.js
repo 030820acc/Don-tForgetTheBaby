@@ -17,15 +17,46 @@ window.addEventListener("load", (event)=>{
     taskTimes.forEach(task => {
         time += parseInt(task.className)
     })
-    timeDisplay.innerText = `${time} Minutes`
+    timeDisplay.innerText = `${time} min`
+
+    const completedTaskDisplay = document.querySelector('#done-tasks')
+    let completedTasks
+
+    if(!completedTasks) {
+        completedTaskDisplay.innerText = 0
+    }
+    else completedTaskDisplay.innerText = completedTasks
+ 
+    
+    
+
 })
 
-const demoButton = document.querySelector('#demo-user')
-const demoUser = document.querySelector('#creds-input')
-const demoSecret = document.querySelector('#pw-input')
+const completionButton = document.querySelector('.completion')
 
-demoButton.addEventListener('click', () => {
+completionButton.addEventListener('click', () => {
+    console.log('inside button event')
+    // fetch('/completed', {
+    //     method: "POST",
+    //     headers: {
+    //         "Content-Type": "application/json"
+    //     },
+    //     body: JSON.stringify({
+    //         taskId: completionButton.value
+    //     })
+    // })
+    //     .then((res) => res.json())
+    //     .then(console.log(resData))
+})
+
+const demoButton = document.getElementById('demo-user')
+const demoUser = document.getElementById('creds-input')
+const demoSecret = document.getElementById('pw-input')
+
+demoButton.addEventListener('click', (e) => {
     console.log('inside demo click')
+    e.preventDefault()
     demoUser.value = 'demo_user'
     demoSecret.value = 'demo'
 })
+

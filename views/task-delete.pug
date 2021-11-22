@@ -1,7 +1,6 @@
 extends layout.pug
 
 block content
- 
   div#taskDeletePage
     div
       h1(class='deleteTaskMessage') Proceed with deleting this task?
@@ -10,3 +9,4 @@ block content
         input(type='hidden' name='_csrf' value=csrfToken)
         button(class='deleteTaskConfirm' type='submit') Yes, delete Task.
         a(class='CancelDeleteTask' href=`/` role='button') Cancel
+

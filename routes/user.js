@@ -5,7 +5,8 @@ const db = require('../db/models')
 const bcrypt = require('bcryptjs')
 const { check, validationResult } = require('express-validator')
 const { loginUser, logoutUser } = require('../auth')
-
+const sequelize = require('sequelize')
+const Op = sequelize.Op
 const csrf = require('csurf');
 const csrfProtection = csrf({ cookie: true });
 const asyncHandler = (handler) => (req, res, next) => handler(req, res, next).catch(next);
@@ -100,6 +101,7 @@ router.post('/user/signup', userValidators, csrfProtection, asyncHandler(async(r
     const hashedPassword = await bcrypt.hash(password, 10);
     user.hashedPassword = hashedPassword;
     await user.save();
+    await db.List.create({ listName: 'Completed Tasks', userId: user.id })
     loginUser(req, res, user);
     res.redirect('/');
   } else {

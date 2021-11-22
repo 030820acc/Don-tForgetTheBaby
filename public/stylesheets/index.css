@@ -1,3 +1,4 @@
+
 html, body {
     margin: 0;
     font-family: sans-serif;
@@ -286,24 +287,24 @@ ul.allLists {
     margin: 8px;
 }
 
-#new-task{
-    display: flex;
-    align-items: center;
+#new-task {
+  display: flex;
+  align-items: center;
 }
 
 #task-list-header {
-    display: flex;
+  display: flex;
 }
 
 
 
-#task-row{
-    border-bottom: 2px black;
-    padding: 5px;
+#task-row {
+  border-bottom: 2px black;
+  padding: 5px;
 }
 
-#property-buttons{
-    display:flex;
+#property-buttons {
+  display: flex;
 }
 
 #logo{
@@ -398,7 +399,7 @@ ul.allLists {
 
 
 h1 {
-    color: #555555;
+  color: white;
 }
 
 #main-content {
