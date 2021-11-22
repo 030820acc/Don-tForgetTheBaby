@@ -2,7 +2,8 @@ const express = require("express");
 const { check, validationResult } = require("express-validator");
 const { async } = require("regenerator-runtime");
 const { requireAuth } = require("../auth");
-const op = require('sequelize')
+const sequelize = require('sequelize')
+const Op = sequelize.Op
 const db = require("../db/models");
 const { csrfProtection, asyncHandler } = require("./utils");
 const router = express.Router();
@@ -69,7 +70,7 @@ router.get('/lists/:id', requireAuth, csrfProtection, asyncHandler(async(req, re
     const listDropdown = await db.List.findAll({
       where: {
         userId,
-        listName: {[op.not]: 'Completed Tasks'}
+        listName: {[Op.not]: 'Completed Tasks'}
       }
     });
 
