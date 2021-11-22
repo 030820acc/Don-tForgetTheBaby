@@ -114,3 +114,7 @@ h1 {
     justify-content: space-around;
     background-color: #b6c9e3;
 } 
+
+#task-time{
+    display: inline;
+}
