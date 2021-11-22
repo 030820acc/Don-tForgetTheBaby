@@ -29,7 +29,7 @@ block content
                 if listHeader
                     h1= listHeader
                 else 
-                    h1 All Tasks
+                    h1(id="summary-header") All Tasks
                 //- li#task-list-header Type in a task.
                 form#new-task(action='/tasks/new' method='post')
                     input(type='hidden' name="_csrf" value=csrfToken)
