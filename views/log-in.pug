@@ -1,24 +1,20 @@
 
 
 block content
-    link(rel='stylesheet' href='/stylesheets/log-in.css')
-    div(class="split left")
-        h1(id="header")="Don't Forget The Baby"  
-    div(class="split right")
-         h2 Been here before? Welcome back!
-         div.log-in-form
+    div.login
+        img(src="/images/dftb1.png" id ="loginLogo")
+
+        div.log-in-form
+            a(href='/user/signup'  id='signUpButton') Sign up for free
+            h2 Been here before? Welcome back!
             if errors
-             p Sorry, that wasn't a valid log in. Please try again.
-         form(action='/user/login' method='post')
-            div(id="form")
+                p Sorry, that wasn't a valid log in. Please try again.
+            form(action='/user/login' method='post' class='loginForm')
                 input(type='hidden' name='_csrf' value=csrfToken)
-                label(for='emailOrUsername') Email or username
+                label(for='emailOrUsername') 
                 input(type='text' name='emailOrUsername' id='creds-input' value=emailOrUsername placeholder='Email or username')
-                label(for='password') Password
+                label(for='password')
                 input(type='password' name='password' id='pw-input' value=password placeholder='Password (case sensitive)')
-                button Log In
-                hr
-         button(id='demo-user') Demo Log In
-         a(href='/user/signup') Don't have an account? Sign up here.
-    
-  
+                button.loginButton Log In
+            button(id='demo-user') Demo Log In
+
