@@ -25,9 +25,8 @@ window.addEventListener("load", (event)=>{
     if(!completedTasks) {
         completedTaskDisplay.innerText = 0
     }
-    else {
-        completedTaskDisplay.innerText = completedTasks
-    }
+    else completedTaskDisplay.innerText = completedTasks
+ 
     
     
 
