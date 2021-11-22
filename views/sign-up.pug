@@ -1,26 +1,27 @@
 extends layout.pug
 
 block content
-    div
-        a(href='/user/login') Log in
-    div.sign-up-form
-        h2 Sign up for free
-        if errors
-            each error in errors
-                p= error
-        form(action='/user/signup' method='post')
-            input(type='hidden' name='_csrf' value=csrfToken)
-            label(for='firstName') First Name
-            input(type='text' name='firstName' value=user.firstName placeholder='First Name')
-            label(for='lastName') Last Name
-            input(type='text' name='lastName' value=user.lastName placeholder='Last Name')
-            label(for='email') Email
-            input(type='email' name='email' value=user.email placeholder='Email')
-            label(for='username') Username
-            input(type='text' name='username' value=user.username placeholder='Username')
-            label(for='password') Password
-            input(type='password' name='password' value=user.password placeholder='Password (case sensitive)')
-            label(for='confirmPassword') Confirm Password
-            input(type='password' name='confirmPassword' value=user.confirmPassword placeholder='Confirm Password')
-            button Sign up!
-    img(src="/images/dftb.png" id ="signupLogo")
+    div.login
+        img(src="/images/dftb1.png" id ="loginLogo")
+
+        a#loginButtonSignupScreen(href='/user/login') Log in
+        div.log-in-form
+            h2 Sign up for free
+            if errors
+                each error in errors
+                    p= error
+            form(action='/user/signup' method='post' class='loginForm')
+                input(type='hidden' name='_csrf' value=csrfToken)
+                label(for='firstName') 
+                input(type='text' name='firstName' id='creds-input' value=user.firstName placeholder='First Name')
+                label(for='lastName') 
+                input(type='text' name='lastName' id='creds-input' value=user.lastName placeholder='Last Name')
+                label(for='email') 
+                input(type='email' name='email' id='creds-input' value=user.email placeholder='Email')
+                label(for='username') 
+                input(type='text' name='username' id='creds-input' value=user.username placeholder='Username')
+                label(for='password') 
+                input(type='password' name='password' id='pw-input' value=user.password placeholder='Password (case sensitive)')
+                label(for='confirmPassword') 
+                input(type='password' name='confirmPassword' id='pw-input' value=user.confirmPassword placeholder='Confirm Password')
+                button.loginButtonSigninPage Sign up!

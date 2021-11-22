@@ -23,6 +23,8 @@ a:visited { text-decoration: none; }
     font-size: 10px;
 }
 
+
+
 #signUpButton:hover{
 
     background-color: #a03902}
@@ -34,6 +36,23 @@ a:visited { text-decoration: none; }
     
 }
 
+#loginButtonSignupScreen{
+    position: absolute;
+    top: 17px;
+    right: 17px;
+    padding: 7px;
+    background-color: #3b579d;
+    border-radius: 3px;
+    color: White;
+    font-weight: bold;
+    border:none;
+    font-size: 10px;
+}
+
+#loginButtonSignupScreen:hover{
+    cursor: pointer;
+    background-color: #1D3C78;
+}
 .loginButton{
     padding: 15px;
     background-color: #3b579d;
@@ -44,6 +63,24 @@ a:visited { text-decoration: none; }
     border:none;
     font-size: 20px;
 
+}
+
+.loginButtonSigninPage{
+    padding: 15px;
+    background-color: #d24b03; 
+    border-radius: 3px;
+    color: White;
+    font-weight: bold;
+    text-align: center;
+    border:none;
+    font-size: 20px;
+
+}
+
+.loginButtonSigninPage:hover{
+    background-color: #a03902;
+
+    cursor: pointer;
 }
 
 .loginButton:hover{
