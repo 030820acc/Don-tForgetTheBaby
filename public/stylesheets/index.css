@@ -90,6 +90,14 @@ html, body {
     margin-right: 10px;
 }
 
+.deleteTaskConfirm:hover{
+    cursor: pointer;
+}
+
+#add-task-button:hover{
+    cursor: pointer;
+}
+
 .deleteTaskMessage{
     color: White;
 }
