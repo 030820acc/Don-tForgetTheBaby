@@ -36,7 +36,7 @@ router.post(
 //     // await newList.save()
 
 
-    if (!validatorErrors.isEmpty()) {
+    if (validatorErrors.isEmpty()) {
       const list = await db.List.create({
         listName,
         userId: userId,
