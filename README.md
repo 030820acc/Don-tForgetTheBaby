@@ -1,6 +1,49 @@
-# Express Project Skeleton
+# MVP List
 
-Use this project skeleton as a starting point for structuring your app. Things to note
-* Sequelize configuration has not yet been added -- you will need to set that up yourself
-* You may find yourself wanting to use javascript -- js files can be added in `public/javascripts` and should be appended to the Pug templates as needed
-* CSS files can go in `public/stylesheets` and also will need to be added to Pug templates
+Don't Forget the Baby, a Remember the Milk clone, is a website for users to create and organize their own dynamic to-do lists, track their progress, and mark tasks and/or lists as complete.
+
+## 1. New Account Creation, Log In, Log Out, Demo/Guest Login
+
+* Users can sign up, log in, and log out.
+* Users can use a demo log in to try the site.
+* Logged in users are directed to their homepage, which shows a list of their tasks and task-lists.
+* Logged out users are directed to a splash homepage, which doubles as the sign-in page.
+
+## 2. Hosting on Heroku
+
+## 3. Lists 
+
+* Users are able to add lists.
+* Within each list they can see all their tasks.
+
+## 4. Tasks 
+
+* Users can add tasks that belong to specific lists.
+* Users can search for tasks or lists by key words.
+* Display estimated time to complete remaining tasks
+
+## 5. Task Tracking
+
+* Users will be able to see in real time:
+    1. The number of tasks they have left
+
+## 6. Production READme
+
+* Brief explanation of what the app is and does.
+* How to start development environment
+* Technologies used
+* Link to live site
+* Link to Wiki docs
+* Discussion of two features that show off the team's technical abilities
+* Discussion of both challenges faced and the way the team solved them
+* Code snippets to highlight the best code
+
+## 7. Bonus Features
+
+* When users mark their tasks as complete, the task will show up in the 'Completed' tab
+* Users can rename lists and/or tasks
+* Tags for list items and smart lists to sort them by tags
+* Subtasks for each list item
+* Users will be able to see in real time:
+    1. The estimated total time it will take to complete all remaining tasks
+* Sort tasks by completed tasks
