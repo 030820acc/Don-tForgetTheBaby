@@ -6,72 +6,51 @@ const db = require('../db/models');
 const { csrfProtection, asyncHandler } = require('./utils');
 const router = express.Router();
 
-const listValidators = [
-  check('listName')
-    .exists({ checkFalsy: true })
-    .withMessage('Please provide List Name')
-    .isLength({ max: 50 })
-    .withMessage('List Name must not be more than 50 characters long')
-];
 
-router.post('/lists/new', requireAuth, csrfProtection, listValidators, asyncHandler(async (req, res) => {
-    const { userId } = req.session.auth;
-    console.log(userId);
-    const {
-      listName
-    } = req.body
+router.post('/lists/new', requireAuth, csrfProtection, asyncHandler(async (req, res) => {
+  const { userId } = req.session.auth;
+  const {
+    listName
+  } = req.body
 
-    const validatorErrors = validationResult(req);
+  if (listName) {
+    const newList = await db.List.create({ listName, userId });
+    // await newList.save()
 
-    if (validatorErrors.isEmpty()) {
-      const list = await db.List.create({
-        listName,
-        userId: userId
-      });
-      // console.log("we're here")
-      return res.redirect('/');
-    } else if (!validatorErrors.isEmpty()) {
-      const errors = validatorErrors.array().map((error) => error.msg);
-      res.redirect('/', {
-        title: 'List',
-        errors,
-        csrfToken: req.csrfToken(),
-      });
+    res.redirect(`/lists/${newList.id}`)
+    // return res.redirect('/');
+  } else {
+    res.redirect('/')
+
+  }
+}
+));
+
+router.get('/lists/:id', requireAuth, csrfProtection, asyncHandler(async (req, res) => {
+  console.log(req.params)
+  const { id } = req.params
+  // console.log(id)
+  const { userId } = req.session.auth;
+  const tasks = await db.Task.findAll({
+    where:
+    {
+      listId: id
     }
-}));
-
-router.get('/lists/:id', requireAuth, csrfProtection, asyncHandler(async(req, res) => {
-    console.log(req.params)
-    const { id } = req.params
-    // console.log(id)
-    const { userId } = req.session.auth;
-    const tasks = await db.Task.findAll({ where:
-      {
-        listId: id
-      }
-    })
-    // console.log(tasks)
-    const lists = await db.List.findAll({ where: { userId } })
-    const selectedList = await db.List.findByPk(id)
-    res.render('homepage', {
-      title: 'Dashboard',
-      lists,
-      tasks,
-      listHeader: selectedList.listName,
-      csrfToken: req.csrfToken()
-    })
-  }))
+  })
+  // console.log(tasks)
+  const lists = await db.List.findAll({ where: { userId } })
+  const selectedList = await db.List.findByPk(id)
+  res.render('homepage', {
+    title: 'Dashboard',
+    lists,
+    tasks,
+    listHeader: selectedList.listName,
+    csrfToken: req.csrfToken()
+  })
+}))
 
 
-const taskValidators = [
-  check('taskName')
-    .exists({ checkFalsy: true })
-    .withMessage('Please provide Task Description')
-    .isLength({ max: 150 })
-    .withMessage('Task description must not be more than 150 characters long')
-];
-
-router.post('/tasks/new', requireAuth, csrfProtection, taskValidators,
+router.post('/tasks/new', requireAuth, csrfProtection,
   asyncHandler(async (req, res) => {
     const { userId } = req.session.auth;
     const {
@@ -79,14 +58,12 @@ router.post('/tasks/new', requireAuth, csrfProtection, taskValidators,
       timeEstimate,
       list,
     } = req.body
-    // console.log(req.body)
 
-    const validatorErrors = validationResult(req)
+    const listObject = await db.List.findByPk(list);
+    const listId = listObject.id
 
-    if (validatorErrors.isEmpty()) {
-      const listObject = await db.List.findByPk(list);
+    if (taskName) {
       // console.log(listObject)
-      const listId = listObject.id
 
       const task = await db.Task.create({
         taskName,
@@ -95,16 +72,13 @@ router.post('/tasks/new', requireAuth, csrfProtection, taskValidators,
         listId: listId
       });
       // console.log("we're here")
-      return res.redirect('/');
-    } else {
-      const errors = validatorErrors.array().map((error) => error.msg);
-      res.redirect('/', {
-        title: 'List',
-        errors,
-        csrfToken: req.csrfToken(),
-      });
+      res.redirect(`/lists/${listId}`)
+      // return res.redirect('/');
+    } else if (listId) {
+      res.redirect(`/lists/${listId}`);
     }
-  }));
+  })
+);
 
 
 module.exports = router;
