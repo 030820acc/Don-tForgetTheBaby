@@ -25,8 +25,20 @@ window.addEventListener("load", (event)=>{
     if(!completedTasks) {
         completedTaskDisplay.innerText = 0
     }
-    else completedTaskDisplay.innerText = completedTasks
+    else {
+        completedTaskDisplay.innerText = completedTasks
+    }
+    
+    
+const demoButton = document.querySelector('#demo-user')
+const demoUser = document.querySelector('#creds-input')
+const demoSecret = document.querySelector('#pw-input')
 
+demoButton.addEventListener('click', () => {
+    console.log('inside demo click')
+    demoUser.value = 'demo_user'
+    demoSecret.value = 'demo'
+})
 })
 
 const completionButton = document.querySelector('.completion')
@@ -46,12 +58,12 @@ completionButton.addEventListener('click', () => {
     //     .then(console.log(resData))
 })
 
-const demoButton = document.querySelector('#demo-user')
-const demoUser = document.querySelector('#creds-input')
-const demoSecret = document.querySelector('#pw-input')
+// const demoButton = document.querySelector('#demo-user')
+// const demoUser = document.querySelector('#creds-input')
+// const demoSecret = document.querySelector('#pw-input')
 
-demoButton.addEventListener('click', () => {
-    console.log('inside demo click')
-    demoUser.value = 'demo_user'
-    demoSecret.value = 'demo'
-})
+// demoButton.addEventListener('click', () => {
+//     console.log('inside demo click')
+//     demoUser.value = 'demo_user'
+//     demoSecret.value = 'demo'
+// })
