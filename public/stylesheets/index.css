@@ -177,6 +177,15 @@ ul.allLists {
 
 }
 
+.allLists{
+    background-color: white;
+    border-radius: 3px;
+    font-size: 20px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    /* padding-left: 10px; */
+}
+
 .list-of-lists{
     padding-bottom: 25px;
     font-size: 20px;
@@ -306,7 +315,6 @@ ul.allLists {
 } */
 
 .num-tasks{
-    
     background-color: white;
     border-radius: 3px;
     display: inline-flex;
