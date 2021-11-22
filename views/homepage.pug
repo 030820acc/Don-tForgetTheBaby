@@ -23,7 +23,7 @@ block content
         div(id="middle-section")
             ul(class='task-index')
                 h3= listHeader
-                li#task-list-header Type in a task.
+                //- li#task-list-header Type in a task.
                 form#new-task(action='/tasks/new' method='post')
                     input(type='hidden' name="_csrf" value=csrfToken)
                     input(class='new-task-input' type='text' name='taskName' placeholder='Add new task...')
