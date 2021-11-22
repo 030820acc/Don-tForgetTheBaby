@@ -59,11 +59,11 @@ router.post('/tasks/new', requireAuth, csrfProtection,
       list,
     } = req.body
 
+    const listObject = await db.List.findByPk(list);
+    const listId = listObject.id
 
     if (taskName) {
-      const listObject = await db.List.findByPk(list);
       // console.log(listObject)
-      const listId = listObject.id
 
       const task = await db.Task.create({
         taskName,
@@ -74,10 +74,11 @@ router.post('/tasks/new', requireAuth, csrfProtection,
       // console.log("we're here")
       res.redirect(`/lists/${listId}`)
       // return res.redirect('/');
-    } else {
-      res.redirect('/');
+    } else if (listId) {
+      res.redirect(`/lists/${listId}`);
     }
-  }));
+  })
+);
 
 
 module.exports = router;
