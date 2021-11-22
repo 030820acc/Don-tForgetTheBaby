@@ -56,6 +56,7 @@ const demoSecret = document.getElementById('pw-input')
 
 demoButton.addEventListener('click', (e) => {
     console.log('inside demo click')
+    e.preventDefault()
     demoUser.value = 'demo_user'
     demoSecret.value = 'demo'
 })
