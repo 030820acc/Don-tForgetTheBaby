@@ -5,7 +5,7 @@ const db = require('../db/models')
 const bcrypt = require('bcryptjs')
 const { check, validationResult } = require('express-validator')
 const { loginUser, logoutUser } = require('../auth')
-
+const op = require('sequelize')
 const csrf = require('csurf');
 const csrfProtection = csrf({ cookie: true });
 const asyncHandler = (handler) => (req, res, next) => handler(req, res, next).catch(next);
