@@ -44,7 +44,8 @@ block content
                     li#task-row= task.taskName
                         span#taskTable
                             div(id='task-time' class=task.taskTime)
-                            a(class='taskDeleteButton' href=`/delete/${task.id}` role='button') Delete
+                            a(class='taskDeleteAnchor' href=`/delete/${task.id}` role='button')
+                                img#deleteButton(src="/images/clipart51372.png" ) 
                         //- a(class=task.taskName href='')
                         //- span= task.taskName
         div(id="right-section")

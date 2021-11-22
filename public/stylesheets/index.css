@@ -118,3 +118,13 @@ h1 {
 #task-time{
     display: inline;
 }
+
+#deleteButton {
+    padding-left: 10px;
+    height: 15px;
+    width: auto;
+}
+
+#task-row{
+    margin: 5px
+}
