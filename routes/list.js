@@ -29,9 +29,9 @@ router.post(
 
 
 
-  if (listName) {
-    const newList = await db.List.create({ listName, userId });
-    // await newList.save()
+//   if (listName) {
+//     const newList = await db.List.create({ listName, userId });
+//     // await newList.save()
 
 
     if (!validatorErrors.isEmpty()) {
