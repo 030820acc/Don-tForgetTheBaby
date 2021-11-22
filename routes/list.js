@@ -6,6 +6,7 @@ const db = require("../db/models");
 const { csrfProtection, asyncHandler } = require("./utils");
 const router = express.Router();
 
+
 const listValidators = [
   check("listName")
     .exists({ checkFalsy: true })
@@ -24,7 +25,11 @@ router.post(
     console.log(userId);
     const { listName } = req.body;
 
-    const validatorErrors = validationResult(req);
+
+  if (listName) {
+    const newList = await db.List.create({ listName, userId });
+    // await newList.save()
+
 
     if (!validatorErrors.isEmpty()) {
       const list = await db.List.create({
@@ -91,10 +96,12 @@ router.post(
 
     const validatorErrors = validationResult(req);
 
-    if (validatorErrors.isEmpty()) {
-      const listObject = await db.List.findByPk(list);
+
+    if (taskName) {
       // console.log(listObject)
+
       const listId = listObject.id;
+
 
       const task = await db.Task.create({
         taskName,
@@ -103,6 +110,7 @@ router.post(
         listId: listId,
       });
       // console.log("we're here")
+
       return res.redirect("/");
     } else {
       const errors = validatorErrors.array().map((error) => error.msg);
@@ -114,5 +122,6 @@ router.post(
     }
   })
 );
+
 
 module.exports = router;
