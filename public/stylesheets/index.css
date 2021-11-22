@@ -49,6 +49,13 @@ a:visited { text-decoration: none; }
     font-size: 10px;
 }
 
+.signInErrors{
+    font-size: 12px;
+    padding: 0px;
+    margin: 1px;
+    color: red;
+}
+
 #loginButtonSignupScreen:hover{
     cursor: pointer;
     background-color: #1D3C78;

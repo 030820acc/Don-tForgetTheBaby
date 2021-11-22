@@ -9,7 +9,7 @@ block content
             h2 Sign up for free
             if errors
                 each error in errors
-                    p= error
+                    p.signInErrors= error
             form(action='/user/signup' method='post' class='loginForm')
                 input(type='hidden' name='_csrf' value=csrfToken)
                 label(for='firstName') 
