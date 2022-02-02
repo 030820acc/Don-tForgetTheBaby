@@ -2,6 +2,8 @@
 
 Don't Forget the Baby, a Remember the Milk clone, is a website for users to create and organize their own dynamic to-do lists, track their progress, and mark tasks and/or lists as complete.
 
+live link: https://projectw13.herokuapp.com/
+
 ## 1. New Account Creation, Log In, Log Out, Demo/Guest Login
 
 * Users can sign up, log in, and log out.
@@ -30,6 +32,23 @@ Don't Forget the Baby, a Remember the Milk clone, is a website for users to crea
 ## 6. Production READme
 
 Don't Forget the Baby is a Remember the Milk clone made using Express and Pug template HTML and Sequelize. 
+
+To set up the app in development:
+run in the root directory
+`npm install`
+
+create a .env file using the .env example file
+
+set up the database to match .env 
+
+run in the root directory
+`npx sequelize db:migrate`
+
+run in the root directory:
+`npx sequelize db:seed:all`
+
+run `npm start` to start the servers
+
 
 ## 7. Bonus Features
 
