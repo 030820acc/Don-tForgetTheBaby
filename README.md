@@ -29,14 +29,7 @@ Don't Forget the Baby, a Remember the Milk clone, is a website for users to crea
 
 ## 6. Production READme
 
-* Brief explanation of what the app is and does.
-* How to start development environment
-* Technologies used
-* Link to live site
-* Link to Wiki docs
-* Discussion of two features that show off the team's technical abilities
-* Discussion of both challenges faced and the way the team solved them
-* Code snippets to highlight the best code
+Don't Forget the Baby is a Remember the Milk clone made using Express and Pug template HTML and Sequelize. 
 
 ## 7. Bonus Features
 
