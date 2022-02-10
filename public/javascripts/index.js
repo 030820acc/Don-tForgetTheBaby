@@ -12,7 +12,7 @@ window.addEventListener("load", (event)=>{
     taskTimes.forEach(task => {
         time += parseInt(task.className)
     })
-    timeDisplay.innerText = `${time} Minutes`
+    timeDisplay.innerText = `${Math.floor(time / 60)} Hours and ${time % 60} Minutes`
 })
 const demoButton = document.querySelector('#demo-user')
 const demoUser = document.querySelector('#creds-input')
